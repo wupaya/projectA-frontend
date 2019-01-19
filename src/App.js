@@ -18,7 +18,7 @@ class App extends Component {
 		};
 	    // Code is invoked after the component is mounted/inserted into the DOM tree.
     componentDidMount() {
-        const url = "http://exmple.com/param/";
+        const url = "http://example.com/param/";
 
         fetch(url,{
 			method: 'POST',
