@@ -54,8 +54,84 @@ class App extends Component {
             // return <li key={index}>{entry}</li>;
         // });
 
-        return <ul>{data}</ul>;
+        return (
+        <div>
+            <ul>{data}</ul>
+            <Login value="some value"/>
+            <InstitutePageManagement />
+        </div>
+        );
     }
 }
+
+
+class Login extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            value:"some arbitary value",
+        };
+    }
+    render(){
+        return (
+        <form action="#">
+        <input 
+        type="text" 
+        value={this.state.value}
+        onClick={() => this.setState({value: 'X'})}
+        /><br />
+        <input 
+        type="text" 
+        value={this.state.value}
+        />
+        </form>
+        );
+    }
+}
+
+class SignUp extends Component{
+    render(){
+        return (
+            <form>
+                Name:
+                <input type="text" name="name" /><br />
+                Email:
+                <input type="text" name="email" /><br />
+                Phone:
+                <input type="text" name="phone" /><br />
+                Password:
+                <input type="text" name="password" />
+            </form>
+        );
+    }
+}
+
+
+class InstitutePageManagement extends Component{
+    render(){
+        return (
+            <div>
+                <button>Create a page</button>
+                <CreateInstitutePageForm />
+            </div>
+        );
+    }
+}
+
+class CreateInstitutePageForm extends Component{
+    render(){
+        return (
+            <div>
+                <form>
+                    Institute Name:<input type="text" name="name" /><br />
+                    Address: <input type="text" name="address" /><br />
+                    Founded Year: <input type="text" name="founded year" /><br />
+                    Description: <input type="text" name="description" />
+                </form>
+            </div>
+        );
+    }
+}
+
 
 export default App;
