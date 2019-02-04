@@ -62,6 +62,7 @@ class App extends Component {
             <p>This project is for demonestration purpose only.</p> 
         </div>
 <Login value="some value"/>
+<HelloComponent />
         </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -171,5 +172,12 @@ class CreateInstitutePageForm extends Component{
     }
 }
 
+class HelloComponent extends Component{
+    render(){
+        return (
+            <p>Hello World</p>
+        )
+    }
+}
 
 export default App;
