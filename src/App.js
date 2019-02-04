@@ -57,6 +57,7 @@ class App extends Component {
         return (
         <div>
         <div className="jumbotron">
+            <h1>Hello world</h1> 
             <h1>Welcome to Test Project</h1> 
             <p>This project is for demonestration purpose only.</p> 
         </div>
