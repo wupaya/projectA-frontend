@@ -57,12 +57,13 @@ class App extends Component {
         return (
         <div>
         <div className="jumbotron">
-            <h1>Hello world</h1> 
             <h1>Welcome to Test Project</h1> 
             <p>This project is for demonestration purpose only.</p> 
         </div>
 <Login value="some value"/>
 <HelloComponent />
+<Hello2Component />
+
         </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -171,13 +172,18 @@ class CreateInstitutePageForm extends Component{
         );
     }
 }
-
 class HelloComponent extends Component{
-    render(){
-        return (
-            <p>Hello World</p>
-        )
-    }
+	render(){
+		return(
+			<p>Hello World</p>
+		)
+	}
 }
-
+class Hello2Component extends Component{
+	render(){
+		return(
+			<p>Hello World one more Time</p>
+		)
+	}
+}
 export default App;
