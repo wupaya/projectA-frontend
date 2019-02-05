@@ -63,7 +63,7 @@ class App extends Component {
         </div>
 <Login value="some value"/>
 <HelloComponent />
-<Hello3Component/>
+<Hello3Component />
         </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -180,11 +180,11 @@ class HelloComponent extends Component{
         )
     }
 }
-class Hello3Component extends component{
-	render(){
+class Hello3Component extends Component{
+    render(){
 		return(
-		<h1>Hello heading</h1>
-		)
-	}
+			<h1>Hello heading</h1> 
+			)
+     }
 }
 export default App;
