@@ -183,8 +183,8 @@ class HelloComponent extends Component{
 class Hello3Component extends{
 	render(){
 		return(
-		<p><h1>Hello heading
-		</h1></p>
+		<h1>Hello heading
+		</h1>
 		)
 	}
 }
