@@ -180,12 +180,11 @@ class HelloComponent extends Component{
         )
     }
 }
-class Hello3Component extends{
+class Hello3Component extends component{
 	render(){
 		return(
 		<h1>Hello heading</h1>
 		)
 	}
 }
-
 export default App;
