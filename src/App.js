@@ -63,6 +63,7 @@ class App extends Component {
         </div>
 <Login value="some value"/>
 <HelloComponent />
+<Hello3Component/>
         </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -178,6 +179,14 @@ class HelloComponent extends Component{
             <p>Hello World</p>
         )
     }
+}
+class Hello3Component extends{
+	render(){
+		return(
+		<p><h1>Hello heading
+		</h1></p>
+		)
+	}
 }
 
 export default App;
