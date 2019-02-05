@@ -64,6 +64,8 @@ class App extends Component {
 <HelloComponent />
 <Hello2Component />
 <Hello3Component />
+<Hello4Component user="Riyadh" />
+<Hello4Component user="Hassan" />
 
         </div>
           // <p>This is some text.</p> 
@@ -192,6 +194,13 @@ class Hello3Component extends Component{
     render(){
 		return(
 			<h1>Hello heading</h1> 
+			)
+     }
+}
+class Hello4Component extends Component{
+    render(){
+		return(
+			<p>Hello{this.props.user}</p>
 			)
      }
 }
