@@ -196,10 +196,11 @@ class Hello3Component extends Component{
 			<h1>Hello heading</h1> 
 			)
      }
+}
 class Hello4Component extends Component{
     render(){
 		return(
-			<p>Hello {this.props.user}</p>
+			<p>Hello{this.props.user}</p>
 			)
      }
 }
