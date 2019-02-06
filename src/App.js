@@ -55,6 +55,24 @@ class App extends Component {
         // });
 
         return (
+		const characters = [
+            {
+                'name': 'Charlie',
+                'job': 'Janitor'
+            },
+            {
+                'name': 'Mac',
+                'job': 'Bouncer'
+            },
+            {
+                'name': 'Dee',
+                'job': 'Aspring actress'
+            },
+            {
+                'name': 'Dennis',
+                'job': 'Bartender'
+            }
+        ];
         <div>
         <div className="jumbotron">
             <h1>Welcome to Test Project</h1> 
@@ -66,8 +84,8 @@ class App extends Component {
 <Hello3Component />
 <Hello4Component user="Riyadh" />
 <Hello4Component user="Hassan" />
-<Table />
-        </div>
+<Table characterData={characters} /> 
+       </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
           // <div>
