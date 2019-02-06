@@ -67,7 +67,8 @@ class App extends Component {
 <Hello3Component />
 <Hello4Component user="Riyadh" />
 <Hello4Component user="Hassan" />
-         </div>
+  <HelloBySajjad/>
+  </div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
           // <div>
