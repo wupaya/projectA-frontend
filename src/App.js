@@ -56,19 +56,21 @@ class App extends Component {
 
         return (
         <div>
-        <div className="jumbotron">
-            <h1>Welcome to Test Project</h1> 
-            <p>This project is for demonestration purpose only.</p> 
-        </div>
-<Login value="some value"/>
-<HelloComponent />
-<Table />
-<Hello2Component />
-<Hello3Component />
-<Hello4Component user="Riyadh" />
-<Hello4Component user="Hassan" />
-  <HelloBySajjad/>
-  </div>
+			<div className="jumbotron">
+				<h1>Welcome to Test Project</h1> 
+				<p>This project is for demonestration purpose only.</p> 
+			</div>
+					<Login value="some value"/>
+					<HelloComponent />
+					<Table />
+					<Hello2Component />
+					<Hello3Component />
+					<Hello4Component user="Riyadh" />
+					<Hello4Component user="Hassan" />
+					<HelloBySajjad/>
+					<Hello5Component myheadline="Welcome to react pros"/>
+
+		</div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
           // <div>
@@ -241,6 +243,13 @@ class HelloBySajjad extends Component{
 	render () {
 		return(
 		<h1>Hello By Sajjad</h1>
+		)
+	}
+}
+class Hello5Component extends Component{
+	render () {
+		return(
+		<h1> {this.props.myheadline} </h1>
 		)
 	}
 }
