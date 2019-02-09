@@ -48,8 +48,25 @@ class App extends Component {
     }
 
 	render() {
+				const characters = [
+					{
+						'name': 'Charlie',
+						'job': 'Janitor'
+					},
+					{
+						'name': 'Mac',
+						'job': 'Bouncer'
+					},
+					{
+						'name': 'Dee',
+						'job': 'Aspring actress'
+					},
+					{
+						'name': 'Dennis',
+						'job': 'Bartender'
+					}
+				];
         const { data } = this.state;
-
         // const result = data.map((entry, index) => {
             // return <li key={index}>{entry}</li>;
         // });
@@ -60,6 +77,7 @@ class App extends Component {
 				<h1>Welcome to Test Project</h1> 
 				<p>This project is for demonestration purpose only.</p> 
 			</div>
+					<Table characterData={characters} />
 					<Login value="some value"/>
 					<HelloComponent />
 					<Table />
@@ -209,6 +227,7 @@ class Hello4Component extends Component{
 }
 class Table extends Component {
     render() {
+		const { characterData } = this.props;
         return (
                <table>
                 <TableHeader />
