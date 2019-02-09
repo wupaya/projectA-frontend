@@ -69,6 +69,7 @@ class App extends Component {
 					<Hello4Component user="Hassan" />
 					<HelloBySajjad/>
 					<Hello5Component myheadline="Welcome to react pros"/>
+					<Hello2BySajjad/>
 
 		</div>
           // <p>This is some text.</p> 
@@ -264,6 +265,13 @@ class Hello5Component extends Component{
 	render () {
 		return(
 		<h1> {this.props.myheadline} </h1>
+		)
+	}
+}
+class Hello2BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello Again By Sajjad</h1>
 		)
 	}
 }
