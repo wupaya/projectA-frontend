@@ -278,7 +278,7 @@ class Hello2BySajjad extends Component{
 class Hello4BySajjad extends Component{
 	render(){
 		return(
-		<h1>Hello Again By Sajjad</h1>
+		<h1>Helloo again By Sajjad</h1>
 		)
 	}
 }
