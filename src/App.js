@@ -70,7 +70,7 @@ class App extends Component {
 					<HelloBySajjad/>
 					<Hello5Component myheadline="Welcome to react pros"/>
 					<Hello2BySajjad/>
-
+					<Hello4BySajjad/>
 		</div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -269,6 +269,13 @@ class Hello5Component extends Component{
 	}
 }
 class Hello2BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello Again By Sajjad</h1>
+		)
+	}
+}
+class Hello4BySajjad extends Component{
 	render(){
 		return(
 		<h1>Hello Again By Sajjad</h1>
