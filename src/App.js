@@ -72,6 +72,7 @@ class App extends Component {
 					<Hello2BySajjad/>
 					<Hello4BySajjad/>
 					<Hello6BySajjad/>
+					<Hello3BySajjad/>
 		</div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
@@ -276,6 +277,7 @@ class Hello2BySajjad extends Component{
 		)
 	}
 }
+
 class Hello4BySajjad extends Component{
 	render(){
 		return(
@@ -297,4 +299,12 @@ class Hello6BySajjad extends Component{
 		)
 	}
 	}
-	export default App;
+
+ class Hello3BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello Again By Sajjad</h1>
+		)
+	}
+ }
+export default App;
