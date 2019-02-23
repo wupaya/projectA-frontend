@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import * as hassan from './hassan';
 
 class App extends Component {
 	
@@ -74,6 +74,9 @@ class App extends Component {
 					<Hello6BySajjad/>
 					<Hello3BySajjad/>
 					<Hello8BySajjad/>
+					<hassan.Hassan/>
+					<hassan.mHassa2/>
+                    
 		</div>
           // <p>This is some text.</p> 
           // <p>This is another text.</p>
