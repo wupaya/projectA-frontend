@@ -1,3 +1,4 @@
+import React, {Component} from 'react';
 export class HelloBySajjad extends Component{
 	render () {
 		return(
@@ -34,14 +35,14 @@ export class Hello6BySajjad extends Component{
 	}
 	}
 
- class Hello3BySajjad extends Component{
+export class Hello3BySajjad extends Component{
 	render(){
 		return(
 		<h1>Hello Again By Sajjad</h1>
 		)
 	}
  }
- class Hello8BySajjad extends Component{
+ export class Hello8BySajjad extends Component{
 	render(){
 		return(
 		<h1>frubary 21 </h1>
