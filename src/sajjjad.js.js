@@ -1,0 +1,50 @@
+export class HelloBySajjad extends Component{
+	render () {
+		return(
+		<h1>Hello By Sajjad</h1>
+		)
+	}
+}
+export class Hello2BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello Again By Sajjad</h1>
+		)
+	}
+}
+export class Hello4BySajjad extends Component{
+	render(){
+		return(
+		<h1>Helloo again By Sajjad</h1>
+		)
+	}
+}
+export class Hello5BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello again By Sajjad</h1>
+		)
+	}
+}
+export class Hello6BySajjad extends Component{
+	render(){
+		return(
+		<h1>Make it easy Sajjad</h1>
+		)
+	}
+	}
+
+ class Hello3BySajjad extends Component{
+	render(){
+		return(
+		<h1>Hello Again By Sajjad</h1>
+		)
+	}
+ }
+ class Hello8BySajjad extends Component{
+	render(){
+		return(
+		<h1>frubary 21 </h1>
+		)
+	}
+ }

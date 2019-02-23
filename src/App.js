@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as hassan from './hassan';
-
+import * as sajjjad from './sajjjad';
 class App extends Component {
 	
 	removeCharacter = index => {
@@ -67,13 +67,12 @@ class App extends Component {
 					<Hello3Component />
 					<Hello4Component user="Riyadh" />
 					<Hello4Component user="Hassan" />
-					<HelloBySajjad/>
 					<Hello5Component myheadline="Welcome to react pros"/>
-					<Hello2BySajjad/>
-					<Hello4BySajjad/>
-					<Hello6BySajjad/>
-					<Hello3BySajjad/>
-					<Hello8BySajjad/>
+					<sajjjad.Hello2BySajjad/>
+					<sajjjad.Hello4BySajjad/>
+					<sajjjad.Hello6BySajjad/>
+					<sajjjad.Hello3BySajjad/>
+					<sajjjad.Hello8BySajjad/>
 					<hassan.Hassan/>
 					<hassan.mHassa2/>
                     
@@ -260,13 +259,7 @@ class TableBody extends Component{
 		)
 	}
 }
-class HelloBySajjad extends Component{
-	render () {
-		return(
-		<h1>Hello By Sajjad</h1>
-		)
-	}
-}
+
 class Hello5Component extends Component{
 	render () {
 		return(
@@ -274,48 +267,7 @@ class Hello5Component extends Component{
 		)
 	}
 }
-class Hello2BySajjad extends Component{
-	render(){
-		return(
-		<h1>Hello Again By Sajjad</h1>
-		)
-	}
-}
 
-class Hello4BySajjad extends Component{
-	render(){
-		return(
-		<h1>Helloo again By Sajjad</h1>
-		)
-	}
-}
-class Hello5BySajjad extends Component{
-	render(){
-		return(
-		<h1>Hello again By Sajjad</h1>
-		)
-	}
-}
-class Hello6BySajjad extends Component{
-	render(){
-		return(
-		<h1>Make it easy Sajjad</h1>
-		)
-	}
-	}
 
- class Hello3BySajjad extends Component{
-	render(){
-		return(
-		<h1>Hello Again By Sajjad</h1>
-		)
-	}
- }
- class Hello8BySajjad extends Component{
-	render(){
-		return(
-		<h1>frubary 21 </h1>
-		)
-	}
- }
+
 export default App;
