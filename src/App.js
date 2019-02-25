@@ -72,9 +72,10 @@ class App extends Component {
 					<sajjjad.Hello4BySajjad/>
 					<sajjjad.Hello6BySajjad/>
 					<sajjjad.Hello3BySajjad/>
-					<sajjjad.Hello9BySajjad/>
+					<sajjjad.Hello11BySajjad/>
 					<hassan.Hassan/>
 					<hassan.mHassa2/>
+					
                     
 		</div>
           // <p>This is some text.</p> 
