@@ -73,6 +73,7 @@ class App extends Component {
 					<sajjjad.Hello6BySajjad/>
 					<sajjjad.Hello3BySajjad/>
 					<sajjjad.Hello11BySajjad/>
+					<sajjjad.mdsajjadalisheikh/>
 					<hassan.Hassan/>
 					<hassan.mHassa2/>
 					
