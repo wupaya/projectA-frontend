@@ -56,4 +56,11 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+ export class mdsajjadalisheikh extends Component{
+	render(){
+		return(
+		<h1>i love you </h1>
+		)
+	}
+ }
  
