@@ -63,4 +63,11 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class iamtotallyalright extends Component{
+	render(){
+		return(
+		<h1>i hate you </h1>
+		)
+	}
+ }
  
