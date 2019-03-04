@@ -63,4 +63,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class hmmm extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1>i hate yoou {username}</h1>
+		)
+	}
+ }
  

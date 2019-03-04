@@ -74,6 +74,9 @@ class App extends Component {
 					<sajjjad.Hello3BySajjad/>
 					<sajjjad.Hello11BySajjad/>
 					<sajjjad.mdsajjadalisheikh/>
+					<sajjjad.hmmm username={"Sajjad"}/>
+					<sajjjad.hmmm username={"Hassan"}/>
+					<sajjjad.hmmm username={"Riyadh"}/>
 					<hassan.Hassan/>
 					<hassan.mHassa2/>
 					
