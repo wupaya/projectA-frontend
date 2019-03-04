@@ -63,10 +63,10 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
-  export class iamtotallyalright extends Component{
+  export class hmmm extends Component{
 	render(){
 		return(
-		<h1>i hate you </h1>
+		<h1>i hate yoou </h1>
 		)
 	}
  }
