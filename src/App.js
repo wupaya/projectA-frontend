@@ -77,6 +77,9 @@ class App extends Component {
 					<sajjjad.hmmm username={"Sajjad"}/>
 					<sajjjad.hmmm username={"Hassan"}/>
 					<sajjjad.hmmm username={"Riyadh"}/>
+					<sajjjad.bigbrother username={"Sajjad"}/>
+					<sajjjad.bigbrother username={"Hassan"}/>
+					<sajjjad.bigbrother username={"Riyadh"}/>
 					<hassan.Hassan/>
 					<hassan.mHassa2/>
 					
