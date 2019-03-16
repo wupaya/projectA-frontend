@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import * as hassan from './hassan';
 import * as sajjjad from './sajjjad';
+import * as Rishat from './rishat';
+
 class App extends Component {
 	
 	removeCharacter = index => {
@@ -81,6 +83,8 @@ class App extends Component {
 					<sajjjad.bigbrother username={"Hassan"}/>
 					<sajjjad.bigbrother username={"Riyadh"}/>
 					<hassan.Hassan/>
+					<Rishat.rishat1/>
+					<Rishat.rishat2/>
 					<hassan.mHassa2/>
 					
                     
