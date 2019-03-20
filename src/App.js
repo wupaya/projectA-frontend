@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import * as hassan from './hassan';
 import * as sajjjad from './sajjjad';
 import * as Rishat from './rishat';
+import * as Arifa from './arifa';
 
 class App extends Component {
 	
@@ -86,6 +87,8 @@ class App extends Component {
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
 					<hassan.mHassa2/>
+                    <Arifa.arifa1/>
+                    <Arifa.arifa2/>
 					
                     
 		</div>
