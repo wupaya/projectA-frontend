@@ -71,11 +71,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
- export class bigbrother extends Component{
+
+  export class fantastick extends Component{
 	render(){
 		const{ username } = this.props;
 		return(
-		<h1>i did not love you {username}</h1>
+		<h1>nmp start {username}</h1>
 		)
 	}
  }
