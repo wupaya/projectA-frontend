@@ -80,4 +80,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class odvut extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1>kaj hoi na {username}</h1>
+		)
+	}
+ }
  
