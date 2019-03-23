@@ -71,4 +71,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+ export class breakup extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1> emotion  {username}</h1>
+		)
+	}
+ }
  
