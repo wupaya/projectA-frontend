@@ -83,6 +83,9 @@ class App extends Component {
 					<sajjjad.fantastick username={"Sajjad"}/>
 					<sajjjad.fantastick username={"Hassan"}/>
 					<sajjjad.fantastick username={"Riyadh"}/>
+					<sajjjad.odvut username={"Sajjad"}/>
+					<sajjjad.odvut username={"Hassan"}/>
+					<sajjjad.odvut username={"Riyadh"}/>
 					<hassan.Hassan/>
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
