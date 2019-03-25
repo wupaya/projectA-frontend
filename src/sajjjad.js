@@ -80,4 +80,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class whatthemann extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1>i am a boyy {username}</h1>
+		)
+	}
+ }
  
