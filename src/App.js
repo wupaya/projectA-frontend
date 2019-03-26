@@ -3,6 +3,7 @@ import * as hassan from './hassan';
 import * as sajjjad from './sajjjad';
 import * as Rishat from './rishat';
 import * as Arifa from './arifa';
+import * as Riyadh from './riyadh';
 
 class App extends Component {
 	
