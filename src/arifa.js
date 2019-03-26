@@ -14,5 +14,12 @@ export class arifa2 extends Component{
 		)
 	}
  }
+ export class arifa3 extends Component{
+	render(){
+		return(
+		<h1>Bismillahir Rahmanir Rahim</h1>
+		)
+	}
+ }
  // export default Hassan;
 
