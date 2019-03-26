@@ -92,6 +92,7 @@ class App extends Component {
 					<hassan.mHassa2/>
                     <Arifa.arifa1/>
                     <Arifa.arifa2/>
+                    <Arifa.arifa3/>
 					
                     
 		</div>
