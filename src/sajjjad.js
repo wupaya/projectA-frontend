@@ -88,4 +88,12 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class pain extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1>kaj hoi naaaaa {username}</h1>
+		)
+	}
+ }
  
