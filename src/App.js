@@ -101,7 +101,7 @@ class App extends Component {
 					<Rakib.Rakib1/>
 					<Rakib.Rakib2/>
                     <Arifa.arifa3/>
-					
+					<Riyadh.HelloByRiyadh/>
                     
 		</div>
           // <p>This is some text.</p> 
