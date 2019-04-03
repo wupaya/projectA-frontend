@@ -96,6 +96,7 @@ class App extends Component {
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
 					<hassan.mHassa2/>
+					<Rakib.Rakib3/>
                     <Arifa.arifa1/>
                     <Arifa.arifa2/>
 					<Rakib.Rakib1/>
