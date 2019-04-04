@@ -22,5 +22,12 @@ export class Rakib2 extends Component{
 	 }
  }
 	 
+export class Rakib4 extends Component{
+	 render(){
+		 return(
+			 <h1>Rakib Jabed </h1>
+		 )
+	 }
+ }
 // export default Hassan;
 
