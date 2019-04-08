@@ -92,16 +92,23 @@ class App extends Component {
 					<sajjjad.bookself username={"Sajjad"}/>
 					<sajjjad.bookself username={"Hassan"}/>
 					<sajjjad.bookself username={"Riyadh"}/>
+					<sajjjad.pain username={"Sajjad"}/>
+					<sajjjad.pain username={"Hassan"}/>
+					<sajjjad.pain username={"Riyadh"}/>
 					<hassan.Hassan/>
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
 					<hassan.mHassa2/>
+					<Rakib.Rakib3/>
+					<Rakib.Rakib4/>
+					<Rakib.Rakib5/>
+					<Rakib.Rakib6/>
                     <Arifa.arifa1/>
                     <Arifa.arifa2/>
 					<Rakib.Rakib1/>
 					<Rakib.Rakib2/>
                     <Arifa.arifa3/>
-					
+					<Riyadh.HelloByRiyadh/>
                     
 		</div>
           // <p>This is some text.</p> 
