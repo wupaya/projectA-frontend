@@ -89,6 +89,9 @@ class App extends Component {
 					<sajjjad.odvut username={"Sajjad"}/>
 					<sajjjad.odvut username={"Hassan"}/>
 					<sajjjad.odvut username={"Riyadh"}/>
+					<sajjjad.bookself username={"Sajjad"}/>
+					<sajjjad.bookself username={"Hassan"}/>
+					<sajjjad.bookself username={"Riyadh"}/>
 					<hassan.Hassan/>
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
