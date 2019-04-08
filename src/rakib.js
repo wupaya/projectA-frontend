@@ -43,7 +43,14 @@ export class Rakib4 extends Component{
 		 )
 	 }
  }
- 
+ export class Rakib7 extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1> Aita notun ta vai {username}</h1>
+        )
+    }
+  }
  
  
  
