@@ -105,4 +105,24 @@ export class Hello3BySajjad extends Component{
 		)
 	}
  }
+  export class StateExample extends Component{
+	  constructor(props) {
+		  super(props);
+		  this.state = { text: "bar" };
+	  }
+	  
+	  baz() {
+		  this.setState ({ text: "baz" });
+	  }
+	  
+	  render () {
+		  return (
+		  <div>
+		  <button onClick={() => this.baz()}>baz</button>
+		  <p>{this.state.text}</p>
+		  </div>
+		  );
+	  }
+  }
+	
  
