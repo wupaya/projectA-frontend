@@ -36,5 +36,17 @@ export class Rakib4 extends Component{
 		 )
 	 }
  }
+ export class Rakib6 extends Component{
+	 render(){
+		 return(
+			 <h1>Rakib123</h1>
+		 )
+	 }
+ }
+ 
+ 
+ 
+ 
+ 
 // export default Hassan;
 
