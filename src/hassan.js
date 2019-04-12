@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 export class Hassan extends Component{
 	render(){
@@ -14,5 +15,59 @@ export class mHassa2 extends Component{
 		)
 	}
  }
- // export default Hassan;
 
+
+  export class ApiExampleByHassan extends Component{
+	  // constructor(props) {
+		  // super(props);
+		  // this.state = { text: "bar" };
+	  // }
+	  
+	  baz() {
+		  //this.setState ({ text: "baz" });
+          const url =
+          'https://en.wikipedia.org/w/api.php?action=opensearch&search=Seona+Dancing&format=json&origin=*'
+
+        // fetch(url)
+          // .then(result => result.json())
+          // .then(result => {
+            // this.setState({
+              // data: result,
+            // })
+          // })
+          
+              $.ajax({
+              url: url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+	  }
+      
+      state = {
+        data: [],
+      }
+      
+	  render () {
+          const { data } = this.state
+
+          const result = data.map((entry, index) => {
+              return <li key={index}>{entry}</li>
+            })
+
+           return (
+              <div>
+              <button onClick={() => this.baz()}>Load and Show Data From Remote Server</button>
+              <ul>{result}</ul>
+              </div>
+		  );
+      }
+		  
+	  }
+
+	

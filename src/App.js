@@ -112,6 +112,7 @@ class App extends Component {
                     <Arifa.arifa3/>
 					<Riyadh.HelloByRiyadh/>
 					<sajjjad.StateExample/>
+					<hassan.ApiExampleByHassan/>
 					
                     
 		</div>
