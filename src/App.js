@@ -98,6 +98,7 @@ class App extends Component {
 					<hassan.Hassan/>
 					<Rishat.rishat1/>
 					<Rishat.rishat2/>
+					<Rishat.rishat3/>
 					<hassan.mHassa2/>
 					<Rakib.Rakib3/>
 					<Rakib.Rakib4/>
@@ -105,6 +106,10 @@ class App extends Component {
 					<Rakib.Rakib6/>
 					<Rakib.Rakib7 username={"Rakib"}/>
 					<Rakib.Rakib7 username={"Hassan"}/>
+					<Rakib.Rakib8 username={"Rakib"}/>
+					<Rakib.Rakib8 username={"Hassan"}/>
+					<Rakib.Rakib9 username={"Rakib"}/>
+					<Rakib.Rakib9 username={"Hassan"}/>
                     <Arifa.arifa1/>
                     <Arifa.arifa2/>
 					<Rakib.Rakib1/>

@@ -15,3 +15,11 @@ export class rishat1 extends Component{
 		 )
 	 }
  }
+ export class rishat3 extends Component{
+	 
+     render(){
+		 return (
+		 <h1> CSE </h1>
+		 )
+	 }
+ }
