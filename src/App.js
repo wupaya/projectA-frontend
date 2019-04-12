@@ -106,6 +106,8 @@ class App extends Component {
 					<Rakib.Rakib6/>
 					<Rakib.Rakib7 username={"Rakib"}/>
 					<Rakib.Rakib7 username={"Hassan"}/>
+					<Rakib.Rakib8 username={"Rakib"}/>
+					<Rakib.Rakib8 username={"Hassan"}/>
                     <Arifa.arifa1/>
                     <Arifa.arifa2/>
 					<Rakib.Rakib1/>
