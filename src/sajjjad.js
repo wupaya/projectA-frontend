@@ -124,5 +124,40 @@ export class Hello3BySajjad extends Component{
 		  );
 	  }
   }
+  export class sajjadexamplebysheikh extends Component{
+ 
+  baz() {
+	  const url =
+	   'https://en.wikipedia.org/w/api.php?action=opensearch&search=Seona+Dancing&format=json&origin=*'
+	   $.ajax({
+		   url:url,
+		   dataType: 'json',
+		   cache: false,
+		   success: function(data){
+			   this.setState({data: data});
+		   }.bind(this),
+		   error: function(xhr, status,err){
+			   console.error(this.props.url,status,err.toString());
+		   }.bind(this)
+	   });
+  }
+  state = {
+	  data: [],
+  }
+  render () {
+	  const { data } = this.state
+	  
+	  const result = data.map ((entry,index) =>{
+		  return<li key={index}>{entry}</li>
+	  })
+	  return(
+	  <div>
+	  <button onClick={() =  this.baz()}>Load and Show Data From Remote Server</button>
+	  <ul>{result}</ul>
+	  </div>
+	  );
+  }
+  }
+  
 	
  
