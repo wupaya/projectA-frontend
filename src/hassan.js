@@ -70,4 +70,44 @@ export class mHassa2 extends Component{
 		  
 	  }
 
+
+  export class ProdAPIExampleHassan extends Component{
+	  // constructor(props) {
+		  // super(props);
+		  // this.state = { text: "bar" };
+	  // }
+	  
+	  baz() {
+		  //this.setState ({ text: "baz" });
+          const url =
+          'http://13.232.5.188/api/hassan/?num1=100&num2=200'
+          
+              $.ajax({
+              url: url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({data: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+	  }
+      
+      state = {
+        data: [],
+      }
+      
+	  render () {
+          const { data } = this.state
+           return (
+              <div>
+              <button onClick={() => this.baz()}>Get DATA from APP server</button>
+              
+              <p>{data.datafromdatabase}</p>
+              </div>
+		  );
+      } 
+	  }	
 	
