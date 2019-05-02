@@ -75,6 +75,25 @@ export class Rakib4 extends Component{
         )
     }
   }
- 
+  export class StateExample extends Component{
+	  constructor(props) {
+		  super(props);
+		  this.state = { text: "rakib" };
+	  }
+	  
+	  ban() {
+		  this.setState ({ text: "jabed" });
+	  }
+	  
+	  render () {
+		  return (
+		  <div>
+		  <button onClick={() => this.ban()}>ban</button>
+		  <p>{this.state.text}</p>
+		  </div>
+		  );
+	  }
+  }
+	
 // export default Hassan;
 
