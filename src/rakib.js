@@ -67,7 +67,14 @@ export class Rakib4 extends Component{
         )
     }
   }
- 
+  export class Rakib10 extends Component{
+	render(){
+		const{ username } = this.props;
+		return(
+		<h1>welcome back  {username}</h1>
+        )
+    }
+  }
  
 // export default Hassan;
 
