@@ -78,11 +78,11 @@ export class Rakib4 extends Component{
   export class StateExample extends Component{
 	  constructor(props) {
 		  super(props);
-		  this.state = { text: "bat" };
+		  this.state = { text: "rakib" };
 	  }
 	  
 	  ban() {
-		  this.setState ({ text: "ban" });
+		  this.setState ({ text: "jabed" });
 	  }
 	  
 	  render () {
