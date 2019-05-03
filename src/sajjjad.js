@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 export class HelloBySajjad extends Component{
 	render () {
 		return(
@@ -147,12 +148,12 @@ export class Hello3BySajjad extends Component{
   render () {
 	  const { data } = this.state
 	  
-	  const result = data.map ((entry,index) =>{
+	  const result = data.map ((entry,index) => {
 		  return<li key={index}>{entry}</li>
 	  })
 	  return(
 	  <div>
-	  <button onClick={() =  this.baz()}>Load and Show Data From Remote Server</button>
+	  <button onClick={() => this.baz()}>Load and Show Data From Remote Server</button>
 	  <ul>{result}</ul>
 	  </div>
 	  );
