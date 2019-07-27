@@ -119,6 +119,7 @@ class App extends Component {
                     <Arifa.arifa3/>
 					<Riyadh.HelloByRiyadh/>
 					<sajjjad.StateExample/>
+					<Rishat.raj/>
 					<Rakib.StateExample/>
 					<hassan.ApiExampleByHassan/>
 					<hassan.ProdAPIExampleHassan/>

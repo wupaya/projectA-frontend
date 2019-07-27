@@ -23,3 +23,10 @@ export class rishat1 extends Component{
 		 )
 	 }
  }
+ export class raj extends Component{
+	 render(){
+		 return (
+		 <h1>Good For Nothing </h1>
+		 )
+	 }
+ }
