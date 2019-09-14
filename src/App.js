@@ -144,6 +144,7 @@ class Home extends Component {
             <p>Click signup button to create account if you have no account yet. It's free.</p>
             {login_signup_button}            
             {signup_form}                       
+
             
             </div>
             </div>
