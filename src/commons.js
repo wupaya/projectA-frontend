@@ -2,18 +2,19 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import {Page} from './page';
 import {Dashboard} from './dashboard';
 
 export class Layout extends Component {
-    
+
     render(){
         var service = this.props.match.params.id
         var view = <Page />;
         if(service == "dashboard"){
            var view = <Dashboard />;
         }
-        
+
         return(
         <div className="container">
             <NavBar/>
@@ -26,32 +27,80 @@ export class Layout extends Component {
     }
 }
 
-export class NavBar extends Component{
+export class NavBar_org extends Component{
+  constructor(props){
+    super(props);
+    this.login_button_handler = this.login_button_handler.bind(this);
+  }
+  state={};
+  componentDidMount() {
+      //check if cookie available
+      let {isLoggedIn} = this.props;
+      if(isLoggedIn){
+        this.setState({isLoggedIn:true});
+      }
+      var session_token = Cookies.get('token')
 
+      if(session_token!=null)
+      {
+          this.setState({
+              isLoggedIn:true
+          });
+
+      }else{
+          this.setState({
+              isLoggedIn:false
+          });
+      }
+  }
+
+  gotodashborad(){
+      this.props.history.push("/private");
+  }
+
+  login_button_handler(){
+    if(!this.state.isLoggedIn){
+      this.setState({isLoggedIn:false});
+      this.props.history.push("/");
+    }else{
+      this.setState({isLoggedIn:false});
+      Cookies.remove('token');
+      this.props.onLogOut();
+    }
+  }
     render(){
-        
+
+        var logoutButtonText = "Logout";
+        var dashboard_button = <button class="btn btn-outline-light my-2 my-sm-0" onClick={()=>{this.gotodashborad();}}>Console</button>;
+        if(!this.state.isLoggedIn){
+          logoutButtonText = "Login";
+          dashboard_button = "";
+        }
         return(
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <Link class="navbar-brand" to="#">IMS</Link>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary nav-tabs">
+    <Link class="navbar-brand active" to="#">IMS</Link>
+    <ul class="nav nav-pills">
+  <li class="active"><a href="#tab-1" data-toggle="tab">Tab 1</a></li>
+  </ul>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav mr-auto">
-        
-      </ul>
-      <form class="form-inline">
+
+      <form class="form-inline mx-auto">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
         <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
       </form>
-      <button class="btn btn-outline-light my-2 my-sm-0" onClick={()=>{this.props.onLogOut();console.log("logout");}}>Logout</button>
+      {dashboard_button}
+      <button class="btn btn-outline-light my-2 my-sm-0" onClick={()=>{this.login_button_handler();}}>{logoutButtonText}</button>
     </div>
   </nav>
         );
     }
 }
 
+export const NavBar = withRouter(NavBar_org);
 
 export class Footer extends Component{
     render(){
@@ -67,12 +116,12 @@ export class Footer extends Component{
 }
 
 class Search extends Component{
-    
+
     baz(e){
          e.preventDefault();
 	  }
     constructor(props){
-        
+
         super(props);
         //his.onlogin_demo = this.onlogin_demo.bind(this);
         this.state = {
@@ -82,28 +131,28 @@ class Search extends Component{
             data: {},
             login_in_progress:false
         };
-        
+
     }
-    
+
     // onlogin_demo(data){
         // this.props.onlogin(data);
     // }
-    
+
     render(){
         const { data } = this.state
         const { login_in_progress } = this.state
-        
+
         var login_form =             <form>
               <div className="form-row align-items-center">
                 <div className="col-auto">
-                 
+
                   <input type="text" className="form-control mb-2" id="keyword" placeholder="Enter keyword here"  />
                 </div>
-                
-                
+
+
                 <div className="col-auto">
                   <button onClick={(e) => this.baz(e)} type="submit" className="btn btn-primary mb-2">Find</button>
-                  
+
                 </div>
               </div>
             </form>
@@ -114,5 +163,21 @@ class Search extends Component{
             {loader_text}
             </div>
         );
+    }
+}
+
+export class RecentlyVisited extends Component{
+    render(){
+         return (
+            <div>
+            <p>Recently Visited</p>
+            <ol>
+            <li><Link to="/public/begum_rokey_univ">Begum Rokeya University</Link></li>
+            <li><a href="#">BUET</a></li>
+            <li><a href="#">Dhaka University</a></li>
+            <li><a href="#">Rangpur Govt. College</a></li>
+            </ol>
+            </div>
+         );
     }
 }

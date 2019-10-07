@@ -1,93 +1,57 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense } from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
-import {NavBar, Footer, RecentlyVisited} from './commons';
-import {InstituteDashboard} from './institute'
+import {Page, NavBar, Footer} from './commons';
+import {ShowStuffList,ManageStuff,AddStuff,RemoveStuff, StuffDetails} from './institute_manage_stuff';
+import {ManageNotice} from './institute_manage_notifications';
+import {StatusAnalysis} from './institute_manage_analysis';
+import {Designation,AccessDesignationList, DetailsAccessDesignation, AddAccessDesignation, ChagneSelfResponsibility} from './institute_manage_responsibility';
 import {withRouter} from 'react-router-dom';
-export class Dashboard extends Component{
-
-    state ={show_page_create_form:false, message:"Create a page",isLoggedIn:true}
-    constructor(props){
-
-        super(props);
-
-    }
 
 
+export class InstituteDashboard extends Component{
 
-    onLogOutHangle(){
-       this.setState({isLoggedIn:false});
-       console.log("working inside");
-    }
-
-
+    state = {associated:["brur","rgc"]}
 
     render(){
 
-        const { match } = this.props;
-        console.log(match.url)
-        if(!this.state.isLoggedIn){
-            return <Redirect to='/'/>;
-        }
-        return (
-            <div className="container">
-                <NavBar onLogOut={this.onLogOutHangle.bind(this)} isLoggedIn={this.state.isLoggedIn}/>
-                <div className="row">
-                <div class="col-lg-2">
-                 <SideBar match={match}/>
-                </div>
-                <div class="col-lg-10">
-                    <Switch>
-                        <Route exact path="/private" component={DashboardHome} />
-                        <Route exact path="/private/services" component={ServiceShortcut} />
-                        <Route path="/private/service/eduman" component={InstituteDashboard} />
-                    </Switch>
-                </div>
-
-                </div>
-                <div className="row">
-                    <Footer />
-                </div>
-            </div>
-
-        );
-    }
-}
-
-class DashboardHome extends Component{
-    state = {
-      subscribed_services:[
-        {id:1, title:"Manage My Institute", short_updates:"You have 4 important tasks to manage."},
-        {id:1, title:"Manage Child's Education", short_updates:"You have 4 important tasks to manage."}
-
-      ]
-    }
-    render(){
-        let {subscribed_services} = this.state;
-        const { match } = this.props;
-        var init = <div><h2>Welcome</h2>
-            ----------------------------------
-            <h4>You are not managing anything yet. Let's <Link to="/private/services">get started</Link></h4></div>;
-        if(subscribed_services.length>0){
-          init = <div className="row">
-            <ServiceShortcut data={subscribed_services[0]} />
-            <ServiceShortcut data={subscribed_services[1]} />
-          </div>
-        }
         return(
-        <div>
-            <FrequentActivity />
-            <hr />
-            <h4>What do you want to do now?</h4>
-            {init}
-        </div>
+            <div>
+            <Switch>
+                <Route exact path="/private/service/eduman/:id" component={TaskGroup}/>
+                <Route
+                  path='/private/service/eduman'
+                  render={(props) => <Welcome {...props} associated={this.state.associated} />}
+                />
+
+            </Switch>
+
+            <ShowTheLocationWithRouter />
+
+
+            </div>
         );
     }
 }
 
-class ServiceDashboard extends Component{
+/*
+use case:
+user receive invitation invitation invite_code
+user input the invite_code
+user is associated with institute
 
+
+
+use case 2: user don't have invitation invite_cod
+user send request for invitation invite_code
+system provide a response code to user on accepted by the admin
+user use response code to collect invitation code from institute.
+
+use case 3:
+*/
+
+class Welcome extends Component{
     state ={show_page_create_form:false, message:"Create a page",isLoggedIn:true}
 
     toggle_page_create(){
@@ -106,32 +70,174 @@ class ServiceDashboard extends Component{
         message:"Page Created successfully"});
     }
     render(){
-
         var button_text = this.state.show_page_create_form ? "" : <button  onClick={this.toggle_page_create.bind(this)}>Create Page</button>;
         var page_create_form = this.state.show_page_create_form ? <CreateInstitutePageForm onCancel={this.onCancelHandle.bind(this)} onCreatePage={this.onCreatePageHandle.bind(this)}/> : "";
-        return(
-            <div>
-            <h3>Now managing: Begum Rokeya University, Rangpur</h3>
-            -------------------------------
-            <p>Your associated institutes</p>
-            -------------------------------
-
-            <p>Management Tasks</p>
-            -------------------------------
-
-
-            <div class="d-flex flex-row bd-highlight mb-3">
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Invite Students & Stuffs"/></div>
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Publish Result"/></div>
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Take attendance"/></div>
-</div>
+        let {associated} =  this.props;
+        console.log(associated);
+        var welcome = <div>
             <p>You are not associated with any institute yet.</p>
-
-            <p>Join to your virtual institute.</p>
+            <hr />
+            <p>If you are invited please enter the code in the following box.</p>
+            <Search />
+            <hr />
+            <p>Be the first to send join request to your institute</p>
                 <Search />
+                <hr />
             <p>If you don't find your institute be the first to create.</p>
+
             {button_text}
             {page_create_form}
+        </div>;
+
+        var welcome_back = <div>
+            <p>Your associated institutes</p>
+            -------------------------------
+            <ul>
+            {
+             associated.map((entry, index) => {
+                return <li key={index}><Link to={{ pathname: "/private/service/eduman/"+entry}}>{entry}</Link></li>
+             })
+            }
+            </ul>
+        </div>;
+
+
+        var view = associated.length > 0 ? welcome_back : welcome;
+
+        return(
+        <div>{view}</div>
+        );
+    }
+}
+
+class TaskGroup extends Component{
+
+    state = {
+      console_tags:[
+        {tag_id:1, tag_nice_id:"ins_people",title:"Manage People",description:"Manage all of your people here"},
+        {tag_id:2, tag_nice_id:"ins_responsibilities",title:"Manage Responsibility",description:"Manage the responsibility of people"},
+        {tag_id:3,tag_nice_id:"ins_requests",title:"Manage Requests",description:"Manage requests for approval"},
+        {tag_id:4,tag_nice_id:"ins_analysis",title:"Manage Analysis",description:"Manage analysis here"}
+      ]
+    }
+
+    generate_link_ref(tagid, nice_tag_id){
+      let {id} = this.props.match.params;
+      return { pathname: "/private/service/eduman/"+id, search: "?action=details_console_tag&tag_id="+tagid+"&component="+nice_tag_id };
+    }
+
+    render(){
+        let {id} = this.props.match.params;
+        let {console_tags} = this.state;
+        let {location} = this.props;
+        let params = new URLSearchParams(location.search);
+        var action = params.get("action")
+        var component = params.get("component")
+        if (action=="manage_designation"){
+            return <div>
+            <Designation />
+            </div>;
+        }else if(action=="manage_stuff"){
+            return <div>
+            <ManageStuff id={id} />
+            </div>;
+       } else if(action=="show_stuff_list"){
+           return(
+             <ShowStuffList/>
+           );
+       } else if(action=="add_stuff"){
+           return <AddStuff/>;
+       }else if(action=="manage_notice"){
+           return <ManageNotice match={this.props.match}/>;
+       }else if(action=="request_details"){
+           return <RequestDetails match={this.props.match}/>;
+       }else if(action=="status_analysis"){
+           return <StatusAnalysis match={this.props.match}/>;
+       }else if(action=="add_designation"){
+           return <AddAccessDesignation match={this.props.match}/>;
+       }else if(action=="detail_designation"){
+           return <DetailsAccessDesignation match={this.props.match}/>;
+       }else if(action=="filter_designation"){
+           return <StatusAnalysis match={this.props.match}/>;
+       }else if(action=="show_all_designation"){
+           return <AccessDesignationList match={this.props.match}/>;
+       }
+       else if(action=="change_self_responsibilities"){
+           return <ChagneSelfResponsibility match={this.props.match}/>;
+       }
+       else if(action=="remove_stuff"){
+           return <RemoveStuff match={this.props.match}/>;
+       }else if(action=="show_stuff_overview"){
+           return <ShowStuffList match={this.props.match}/>;
+       }
+       else if(action=="stuff_details"){
+           return <StuffDetails match={this.props.match}/>;
+       }
+       else if(action=="details_console_tag"){
+const Test = React.lazy(() => import('./institute/'+ component));
+           return <div>
+           <Suspense fallback={<div>Loading...</div>}>
+        <Test match={this.props.match}/>
+      </Suspense>
+      </div>;
+
+       }
+       else if(action!=null){
+         return(
+           <h3>The feature might be under development.</h3>
+         );
+       }
+
+        return(
+            <div>
+            <h3>Now managing: {id}</h3>
+            <hr />
+
+
+            <p>What you would like to do?</p>
+
+
+
+            {console_tags.map((key, index) => {
+              return <div class="p-2 bd-highlight">
+              <Link to={this.generate_link_ref(key["tag_id"], key["tag_nice_id"])}>{key["title"]}</Link>
+              <p class="card-text">{key["description"]}</p>
+              </div>;
+            })}
+
+            <hr />
+            <Link to="#">Help me to start</Link>
+            </div>
+        );
+    }
+}
+
+class BottonNavigation extends Component{
+    constructor(props){
+       super(props);
+       this.goBack = this.goBack.bind(this); // i think you are missing this
+    }
+
+    goBack(){
+        this.props.history.go(-1);
+    }
+
+
+       render(){
+           var message = "Go Back";
+           return(
+                <button onClick={this.goBack} className="">Go Back</button>
+           );
+       }
+}
+//export default withRouter(BottonNavigation);
+const ShowTheLocationWithRouter = withRouter(BottonNavigation);
+
+class RequestDetails extends Component{
+    render(){
+        return(
+            <div>
+                Request details will be shown here
             </div>
         );
     }
@@ -202,57 +308,25 @@ class Search extends Component{
 }
 
 class ServiceShortcut extends Component{
-
     render(){
-        let {data} = this.props;
-        var default_title = <h6 class="card-subtitle mb-2 text-muted">Educational Institute Manager</h6>;
-        var default_description = "If you are associated with any educational institute, this tool will help you to manage your operations.If you are associated with any educational institute, this tool will help you to manage your operations.";
         return(
             <div class="card" style={{width: '18rem'}}>
               <div class="card-body">
-                <h5 class="card-title">{data["title"]}</h5>
+                <h5 class="card-title">EDUMAN</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Educational Institute Manager</h6>
-                <p class="card-text">{data["short_updates"]}</p>
+                <p class="card-text">If you are associated with any educational institute, this tool will help you to manage your operations.</p>
                 <Link to="/private/service/eduman" class="card-link">Get started</Link>
               </div>
             </div>
         );
     }
 }
-class SideBar extends Component{
-
-    render(){
-        const { match } = this.props;
-        return(
-        <Switch>
-
-            <Route  path="/private/service/eduman" component={ServiceSidebar} />
-            <Route exact path="/private" component={HomeSidebar} />
-        </Switch>
-        );
-    }
-}
-
-class HomeSidebar extends Component{
-    render(){
-        return(
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <Link to="/private" className="nav-link active">Home</Link>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
-              </li>
-            </ul>
-        );
-    }
-}
-
 
 class ServiceSidebar extends Component{
     render(){
         return(
             <ul class="nav flex-column">
+
               <li class="nav-item">
                 <Link to="/private/service/eduman" className="nav-link active">Home</Link>
               </li>
@@ -351,75 +425,5 @@ class CreateInstitutePageForm extends Component{
                 </form>
             </div>
         );
-    }
-}
-class Table extends Component {
-    render() {
-        return (
-               <table>
-                <TableHeader />
-                <TableBody />
-            </table>
-        );
-    }
-}
-class TableHeader extends Component{
-	render () {
-		return(
-				<thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Job</th>
-                    </tr>
-                </thead>
-			)
-	}
-}
-class TableBody extends Component{
-	render () {
-		return(
-			<tbody>
-				<tr>
-					<td>Charlie</td>
-					<td>Janitor</td>
-				</tr>
-				<tr>
-					<td>Mac</td>
-					<td>Bouncer</td>
-				</tr>
-				<tr>
-					<td>Dee</td>
-					<td>Aspiring actress</td>
-				</tr>
-				<tr>
-					<td>Dennis</td>
-					<td>Bartender</td>
-				</tr>
-			</tbody>
-		)
-	}
-}
-
-
-export class FrequentActivity extends Component{
-    state = {
-      recent_activities: [
-        {title:"Show me class IX results",link:"#"},
-        {title:"Show me delayed present stuffs",link:"#"},
-        {title:"What's the schools status today?",link:"#"},
-        {title:"Show my child's progress",link:"#"},
-        {title:"Add a new stuff",link:"#"}
-      ]
-    }
-    render(){
-        let {recent_activities} = this.state;
-         return (
-            <div>
-            <p>Frequent activities</p>
-            <ol>
-            {recent_activities.map((key, index)=>{return <li><Link to={key["link"]}>{key["title"]}</Link></li>})}
-            </ol>
-            </div>
-         );
     }
 }
