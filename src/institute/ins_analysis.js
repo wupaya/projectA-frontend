@@ -9,21 +9,18 @@ class StatusAnalysis extends Component{
     render(){
         return(
             <div>
-                <p>What would you like to know?</p>
+                <h3>Overview</h3>
+                <p>89% students are present. That's very good.</p>
+                <p>60% teachers are doing great.</p>
+                <p>75% guardians are happy with the education of their children.</p>
+                <p>This institute is in the top 10 best school.</p>
+                <hr />
+                <p>What else would you like to know?</p>
                 <ul>
                 <li>Show me who are absent today.</li>
                 <li>Show me teachers who are performing best.</li>
                 <li>Show me students presence statistics.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
-                <li>Show me who are absent today.</li>
+                <li>More</li>
                 </ul>
             </div>
         );

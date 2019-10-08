@@ -7,8 +7,19 @@ import {withRouter} from 'react-router-dom';
 
 
 class ManageStuff extends Component{
+  state = {
+    tasks:[
+      {taskid:3, task_nice_id:"ins_stuff_list",task_description:"Show all stuff"},
+      {taskid:4, task_nice_id:"ins_add_stuff",task_description:"add new stuff"},
+      {taskid:13, task_nice_id:"ins_remove_stuff",task_description:"remove stuff"},
+      {taskid:15, task_nice_id:"ins_stuff_details",task_description:"Show stuff details"},
+      {taskid:16, task_nice_id:"ins_edit_stuff",task_description:"I want to change the responsibility & permission of stuff"}
+
+    ]
+  }
     render(){
         let {id} = this.props;
+        let {tasks} = this.state;
 
         return(
             <div>
@@ -20,15 +31,7 @@ class ManageStuff extends Component{
                 <hr />
                 <p>What you would like to do?</p>
                 <ul>
-                    <li>Show me stuffs who are
-                      <Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=show_stuff_overview&filter=active" }}> Active</Link>/
-                      <Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=show_stuff_overview&filter=on_leave" }}>On Leave</Link>/
-                      <Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=show_stuff_overview&filter=pending_invitation" }}>Sent Invitation Request</Link>
-                    </li>
-                    <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=add_stuff" }}>I want to add new stuff</Link></li>
-                    <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=remove_stuff" }}>I want to remove stuff</Link></li>
-                    <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=edit_stuff" }}>I want to change the responsibility & permission of stuff</Link></li>
-                    <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=stuff_details" }}>I want to know stuff details</Link></li>
+                  {tasks.map((key,index)=>{return <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=task&taskid="+key["task_nice_id"] }}>{key["task_description"]}</Link></li>})}
                 </ul>
                 <hr />
                 <p><Link to="#">I would like to know how the stuffs are doing</Link></p>

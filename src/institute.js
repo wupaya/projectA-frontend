@@ -3,10 +3,6 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
 import {Page, NavBar, Footer} from './commons';
-import {ShowStuffList,ManageStuff,AddStuff,RemoveStuff, StuffDetails} from './institute_manage_stuff';
-import {ManageNotice} from './institute_manage_notifications';
-import {StatusAnalysis} from './institute_manage_analysis';
-import {Designation,AccessDesignationList, DetailsAccessDesignation, AddAccessDesignation, ChagneSelfResponsibility} from './institute_manage_responsibility';
 import {withRouter} from 'react-router-dom';
 
 
@@ -133,53 +129,23 @@ class TaskGroup extends Component{
         let params = new URLSearchParams(location.search);
         var action = params.get("action")
         var component = params.get("component")
-        if (action=="manage_designation"){
-            return <div>
-            <Designation />
-            </div>;
-        }else if(action=="manage_stuff"){
-            return <div>
-            <ManageStuff id={id} />
-            </div>;
-       } else if(action=="show_stuff_list"){
-           return(
-             <ShowStuffList/>
-           );
-       } else if(action=="add_stuff"){
-           return <AddStuff/>;
-       }else if(action=="manage_notice"){
-           return <ManageNotice match={this.props.match}/>;
-       }else if(action=="request_details"){
-           return <RequestDetails match={this.props.match}/>;
-       }else if(action=="status_analysis"){
-           return <StatusAnalysis match={this.props.match}/>;
-       }else if(action=="add_designation"){
-           return <AddAccessDesignation match={this.props.match}/>;
-       }else if(action=="detail_designation"){
-           return <DetailsAccessDesignation match={this.props.match}/>;
-       }else if(action=="filter_designation"){
-           return <StatusAnalysis match={this.props.match}/>;
-       }else if(action=="show_all_designation"){
-           return <AccessDesignationList match={this.props.match}/>;
-       }
-       else if(action=="change_self_responsibilities"){
-           return <ChagneSelfResponsibility match={this.props.match}/>;
-       }
-       else if(action=="remove_stuff"){
-           return <RemoveStuff match={this.props.match}/>;
-       }else if(action=="show_stuff_overview"){
-           return <ShowStuffList match={this.props.match}/>;
-       }
-       else if(action=="stuff_details"){
-           return <StuffDetails match={this.props.match}/>;
-       }
-       else if(action=="details_console_tag"){
-const Test = React.lazy(() => import('./institute/'+ component));
+        var task = params.get("taskid")
+       if(action=="details_console_tag"){
+           const Test = React.lazy(() => import('./institute/'+ component));
            return <div>
-           <Suspense fallback={<div>Loading...</div>}>
-        <Test match={this.props.match}/>
-      </Suspense>
-      </div>;
+             <Suspense fallback={<div>Loading...</div>}>
+                <Test match={this.props.match}/>
+             </Suspense>
+           </div>;
+
+       }
+       else if(action=="task"){
+           const Test = React.lazy(() => import('./institute/'+ task));
+           return <div>
+             <Suspense fallback={<div>Loading...</div>}>
+                <Test match={this.props.match}/>
+             </Suspense>
+           </div>;
 
        }
        else if(action!=null){
@@ -192,12 +158,7 @@ const Test = React.lazy(() => import('./institute/'+ component));
             <div>
             <h3>Now managing: {id}</h3>
             <hr />
-
-
             <p>What you would like to do?</p>
-
-
-
             {console_tags.map((key, index) => {
               return <div class="p-2 bd-highlight">
               <Link to={this.generate_link_ref(key["tag_id"], key["tag_nice_id"])}>{key["title"]}</Link>
@@ -232,16 +193,6 @@ class BottonNavigation extends Component{
 }
 //export default withRouter(BottonNavigation);
 const ShowTheLocationWithRouter = withRouter(BottonNavigation);
-
-class RequestDetails extends Component{
-    render(){
-        return(
-            <div>
-                Request details will be shown here
-            </div>
-        );
-    }
-}
 
 class ManagementTaskShortcut extends Component{
     render(){
