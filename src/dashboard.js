@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
-import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, Switch, NavLink} from "react-router-dom";
 import {NavBar, Footer, RecentlyVisited} from './commons';
-import {InstituteDashboard} from './institute'
 import {withRouter} from 'react-router-dom';
+import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+
+
 export class Dashboard extends Component{
 
     state ={show_page_create_form:false, message:"Create a page",isLoggedIn:true}
@@ -24,7 +26,8 @@ export class Dashboard extends Component{
 
 
     render(){
-
+        //lazy load
+        const InstituteDashboard = React.lazy(() => import('./institute/'+ 'dashboard'));
         const { match } = this.props;
         console.log(match.url)
         if(!this.state.isLoggedIn){
@@ -34,15 +37,29 @@ export class Dashboard extends Component{
             <div className="container">
                 <NavBar onLogOut={this.onLogOutHangle.bind(this)} isLoggedIn={this.state.isLoggedIn}/>
                 <div className="row">
-                <div class="col-lg-2">
-                 <SideBar match={match}/>
+
                 </div>
-                <div class="col-lg-10">
+                <div className="row">
+                <div class="col-lg-12">
+                <Breadcrumbs
+          separator={<b> / </b>}
+          item={NavLink}
+          finalItem={"b"}
+          finalProps={{
+            style: {color: "red"}
+          }}
+        />
+<hr />
+                <BreadcrumbsItem to="/">Home</BreadcrumbsItem>
+                <Suspense fallback={<div>Loading...</div>}>
+
                     <Switch>
                         <Route exact path="/private" component={DashboardHome} />
                         <Route exact path="/private/services" component={ServiceShortcut} />
                         <Route path="/private/service/eduman" component={InstituteDashboard} />
                     </Switch>
+                    </Suspense>
+
                 </div>
 
                 </div>
@@ -86,56 +103,6 @@ class DashboardHome extends Component{
     }
 }
 
-class ServiceDashboard extends Component{
-
-    state ={show_page_create_form:false, message:"Create a page",isLoggedIn:true}
-
-    toggle_page_create(){
-        this.setState({show_page_create_form:true, message: "Enter the required information."});
-    }
-    onCancelHandle(){
-        this.setState({show_page_create_form:false});
-    }
-
-    onPageCreateHandler(data){
-        this.setState({pageCreateResponse:data});
-    }
-
-    onCreatePageHandle(data){
-        this.setState({show_page_create_form:false,
-        message:"Page Created successfully"});
-    }
-    render(){
-
-        var button_text = this.state.show_page_create_form ? "" : <button  onClick={this.toggle_page_create.bind(this)}>Create Page</button>;
-        var page_create_form = this.state.show_page_create_form ? <CreateInstitutePageForm onCancel={this.onCancelHandle.bind(this)} onCreatePage={this.onCreatePageHandle.bind(this)}/> : "";
-        return(
-            <div>
-            <h3>Now managing: Begum Rokeya University, Rangpur</h3>
-            -------------------------------
-            <p>Your associated institutes</p>
-            -------------------------------
-
-            <p>Management Tasks</p>
-            -------------------------------
-
-
-            <div class="d-flex flex-row bd-highlight mb-3">
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Invite Students & Stuffs"/></div>
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Publish Result"/></div>
-  <div class="p-2 bd-highlight"><ManagementTaskShortcut name="Take attendance"/></div>
-</div>
-            <p>You are not associated with any institute yet.</p>
-
-            <p>Join to your virtual institute.</p>
-                <Search />
-            <p>If you don't find your institute be the first to create.</p>
-            {button_text}
-            {page_create_form}
-            </div>
-        );
-    }
-}
 
 class ManagementTaskShortcut extends Component{
     render(){
@@ -247,7 +214,6 @@ class HomeSidebar extends Component{
         );
     }
 }
-
 
 class ServiceSidebar extends Component{
     render(){

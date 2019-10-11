@@ -181,3 +181,25 @@ export class RecentlyVisited extends Component{
          );
     }
 }
+
+
+class BottonNavigation extends Component{
+    constructor(props){
+       super(props);
+       this.goBack = this.goBack.bind(this); // i think you are missing this
+    }
+
+    goBack(){
+        this.props.history.go(-1);
+    }
+
+
+       render(){
+           var message = "Go Back";
+           return(
+                <button onClick={this.goBack} className="">Go Back</button>
+           );
+       }
+}
+//export default withRouter(BottonNavigation);
+const ShowTheLocationWithRouter = withRouter(BottonNavigation);

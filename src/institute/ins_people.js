@@ -3,6 +3,7 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
+import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 
 
@@ -23,6 +24,7 @@ class ManageStuff extends Component{
 
         return(
             <div>
+                <BreadcrumbsItem to="/private/service/eduman/:id">Manage People</BreadcrumbsItem>
                 <p>Stuff Overview</p>
                 <hr />
                 <p>You have <a href="#" className="btn btn-outline-primary">20 active stuff,</a>

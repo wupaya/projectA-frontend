@@ -5,15 +5,18 @@ import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
 import {Layout, Footer, RecentlyVisited} from './commons';
 import {Dashboard} from './dashboard';
 import {Page} from './page';
+import {ThroughProvider} from 'react-through';
 
 class App extends Component {
     render(){
         return(
+          <ThroughProvider>
         <Router>
         <Route exact path="/" component={Home} />
         <Route path="/public/:id" component={Page} />
         <Route path="/private" component={Dashboard} />
         </Router>
+          </ThroughProvider>
         );
     }
 }
