@@ -44,7 +44,8 @@ class TaskGroup extends Component{
         {tag_id:2, tag_nice_id:"ins_responsibilities",title:"Manage Responsibility",description:"Manage the responsibility of people"},
         {tag_id:3,tag_nice_id:"ins_requests",title:"Manage Requests",description:"Manage requests for approval"},
         {tag_id:4,tag_nice_id:"ins_analysis",title:"Manage Analysis",description:"Manage analysis here"},
-        {tag_id:5,tag_nice_id:"ins_public_page_tag",title:"Manage Public Page",description:"Manage Public Page"}
+        {tag_id:5,tag_nice_id:"ins_public_page_tag",title:"Manage Public Page",description:"Manage Public Page"},
+		{tag_id:6,tag_nice_id:"ins_tag_class",title:"Manage classroom",description:"Manage classroom"}
       ]
     }
 
