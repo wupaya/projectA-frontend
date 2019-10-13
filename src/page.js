@@ -6,12 +6,31 @@ import { withRouter} from "react-router-dom";
 import {NavBar, Footer} from './commons'
 
 class Page1 extends Component{
+    state ={
+      page:{
+        nuid:1231,
+        sid:"begum_rokey_univ",
+        title: "Department of Computer Science and Engineering",
+        subtitle: "One of the Departments at Begum Rokeya University, Rangpur",
+        contact:"",
+        short_description:"",
+        quick_overview:"It is founded in 2008. At present 250 students are enrolled in this discipline. There are 10 world class faculty memebers.",
+        lastest_events:[
+          {title:"News: CSE BRUR started using IMS system.",details_link:"#"},
+          {title:"Event: Inter batch programming contest on sunday, 9th oct.",details_link:"#"},
+          {title:"Circular: Admission is open",details_link:"#"},
+          {title:"Notice: New Policy for Scholarship.",details_link:"#"}
+        ]
+      
 
+      }
+    }
     onLogOutHangle(){
       Cookies.remove("token");
     }
 
     render(){
+        let {page} = this.state;
         //{this.props.match.params.id}
         return(
         <div className="container">
@@ -23,21 +42,16 @@ class Page1 extends Component{
                   <SideBar />
                 </div>
                 <div class="col-lg-10">
-                <h2>Department of Computer Science and Engineering</h2>
-                <p>One of the Departments at Begum Rokeya University, Rangpur</p>
+                <h2>{page.title}</h2>
+                <p>{page.subtitle}</p>
                 <hr />
                 <h5>Quick Overview</h5>
-                <p>It is founded in 2008. At present 250 students are enrolled in this discipline. There are 10 world class faculty memebers.</p>
+                <p>{page.quick_overview}</p>
                 <hr />
                 <h5>Latest Events</h5>
                 <ul>
-                  <li>News: CSE BRUR started using IMS system.</li>
-                  <li>Event: Inter batch programming contest on sunday, 9th oct.</li>
-                  <li>Circular: Admission is open</li>
-                  <li>Notice: New Policy for Scholarship.</li>
+                  {page.lastest_events.map((key, index)=>{return <li>{key["title"]}</li>})}
                 </ul>
-                <hr />
-                <h5>Our Achivements</h5>
               </div>
 
             </div>

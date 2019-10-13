@@ -46,7 +46,7 @@ export class Dashboard extends Component{
           item={NavLink}
           finalItem={"b"}
           finalProps={{
-            style: {color: "red"}
+            style: {}
           }}
         />
 <hr />
@@ -249,7 +249,7 @@ class CreateInstitutePageForm extends Component{
     create_page(e){
           e.preventDefault();
           var auth_token = Cookies.get("token");
-           const url = 'http://13.232.5.188/api/public_page/';
+          const url = 'http://13.232.5.188/api/public_page/';
           //const url ='http://localhost:8000/public_page/';
 
           $.ajax({

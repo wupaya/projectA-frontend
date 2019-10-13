@@ -43,7 +43,8 @@ class TaskGroup extends Component{
         {tag_id:1, tag_nice_id:"ins_people",title:"Manage People",description:"Manage all of your people here"},
         {tag_id:2, tag_nice_id:"ins_responsibilities",title:"Manage Responsibility",description:"Manage the responsibility of people"},
         {tag_id:3,tag_nice_id:"ins_requests",title:"Manage Requests",description:"Manage requests for approval"},
-        {tag_id:4,tag_nice_id:"ins_analysis",title:"Manage Analysis",description:"Manage analysis here"}
+        {tag_id:4,tag_nice_id:"ins_analysis",title:"Manage Analysis",description:"Manage analysis here"},
+        {tag_id:5,tag_nice_id:"ins_public_page_tag",title:"Manage Public Page",description:"Manage Public Page"}
       ]
     }
 
@@ -52,55 +53,74 @@ class TaskGroup extends Component{
       return { pathname: "/private/service/eduman/"+id, search: "?action=details_console_tag&tag_id="+tagid+"&component="+nice_tag_id };
     }
 
+    componentDidCatch(error, info) {
+      // Display fallback UI
+      this.setState({ hasError: true });
+      // You can also log the error to an error reporting service
+      //logErrorToMyService(error, info);
+    }
+  
+
     render(){
-        let {id} = this.props.match.params;
-        let {console_tags} = this.state;
-        let {location} = this.props;
-        let params = new URLSearchParams(location.search);
-        var action = params.get("action")
-        var component = params.get("component")
-        var task = params.get("taskid")
-       if(action=="details_console_tag"){
-           const Test = React.lazy(() => import('./'+ component));
-           return <div>
-             <Suspense fallback={<div>Loading...</div>}>
-                <Test match={this.props.match}/>
-             </Suspense>
-           </div>;
 
-       }
-       else if(action=="task"){
-           const Test = React.lazy(() => import('./'+ task));
-           return <div>
-             <Suspense fallback={<div>Loading...</div>}>
-                <Test match={this.props.match}/>
-             </Suspense>
-           </div>;
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return <h1>Something went wrong.</h1>;
+      }
+          let {id} = this.props.match.params;
+          let {console_tags} = this.state;
+          let {location} = this.props;
+          let params = new URLSearchParams(location.search);
+          var action = params.get("action")
+          var component = params.get("component")
+          var task = params.get("taskid")
+        if(action=="details_console_tag"){
+            if(component==null){
+              return <p>Something went wrong.</p>
+            }
+            const Test = React.lazy(() => import('./'+ component));
+            return <div>
+              <Suspense fallback={<div>Loading...</div>}>
+                  <Test match={this.props.match}/>
+              </Suspense>
+            </div>;
 
-       }
-       else if(action!=null){
-         return(
-           <h3>The feature might be under development.</h3>
-         );
-       }
+        }
+        else if(action=="task"){
+            if(task==null){
+              return <p>Something went wrong.</p>
+            }
+            const Test = React.lazy(() => import('./'+ task));
+            return <div>
+              <Suspense fallback={<div>Loading...</div>}>
+                  <Test match={this.props.match}/>
+              </Suspense>
+            </div>;
 
-        return(
-            <div>
-            <BreadcrumbsItem to="/private/service/eduman/:id">{id}</BreadcrumbsItem>
-            <h3>Now managing: {id}</h3>
-            <hr />
-            <p>What you would like to do?</p>
-            {console_tags.map((key, index) => {
-              return <div class="p-2 bd-highlight">
-              <Link to={this.generate_link_ref(key["tag_id"], key["tag_nice_id"])}>{key["title"]}</Link>
-              <p class="card-text">{key["description"]}</p>
-              </div>;
-            })}
+        }
+        else if(action!=null){
+          return(
+            <h3>The feature might be under development.</h3>
+          );
+        }
 
-            <hr />
-            <Link to="#">Help me to start</Link>
-            </div>
-        );
+          return(
+              <div>
+              <BreadcrumbsItem to="/private/service/eduman/:id">{id}</BreadcrumbsItem>
+              <h3>Now managing: {id}</h3>
+              <hr />
+              <p>What you would like to do?</p>
+              {console_tags.map((key, index) => {
+                return <div class="p-2 bd-highlight">
+                <Link to={this.generate_link_ref(key["tag_id"], key["tag_nice_id"])}>{key["title"]}</Link>
+                <p class="card-text">{key["description"]}</p>
+                </div>;
+              })}
+
+              <hr />
+              <Link to="#">Help me to start</Link>
+              </div>
+          );
     }
 }
 
