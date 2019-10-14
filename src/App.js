@@ -1,22 +1,26 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import {Layout, Footer, RecentlyVisited} from './commons';
 import {Dashboard} from './dashboard';
-import {Page} from './page';
 import {ThroughProvider} from 'react-through';
 
 class App extends Component {
     render(){
+      const institute_page = React.lazy(() => import('./institute/'+ 'ins_page'));
         return(
+          
           <ThroughProvider>
-        <Router>
-        <Route exact path="/" component={Home} />
-        <Route path="/public/:id" component={Page} />
-        <Route path="/private" component={Dashboard} />
-        </Router>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Router>
+              <Route exact path="/" component={Home} />
+              <Route path="/public/:id" component={institute_page} />
+              <Route path="/private" component={Dashboard} />
+              </Router>
+            </Suspense>
           </ThroughProvider>
+         
         );
     }
 }

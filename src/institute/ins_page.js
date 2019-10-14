@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { withRouter} from "react-router-dom";
-import {NavBar, Footer} from './commons'
+import {NavBar, Footer} from '../commons'
 
 class Page1 extends Component{
     state ={
@@ -64,7 +64,7 @@ class Page1 extends Component{
 }
 
 const Page = withRouter(Page1);
-export {Page};
+export default Page;
 class SideBar extends Component{
 
     render(){
