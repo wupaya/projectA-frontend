@@ -3,12 +3,13 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { withRouter} from "react-router-dom";
-import {Page} from './page';
+//import {Page} from './page';
 import {Dashboard} from './dashboard';
 
 export class Layout extends Component {
 
     render(){
+      const Page = React.lazy(() => import('./institute/'+ 'ins_page'));
         var service = this.props.match.params.id
         var view = <Page />;
         if(service == "dashboard"){
