@@ -24,7 +24,7 @@ class ManageStuff extends Component{
 
         return(
             <div>
-                <BreadcrumbsItem to="/private/service/eduman/:id">Manage People</BreadcrumbsItem>
+                <BreadcrumbsItem to="/private/service/eduman/:id?action=details_console_tag&tag_id=1&component=ins_people">Manage People</BreadcrumbsItem>
                 <p>Stuff Overview</p>
                 <hr />
                 <p>You have <a href="#" className="btn btn-outline-primary">20 active stuff,</a>

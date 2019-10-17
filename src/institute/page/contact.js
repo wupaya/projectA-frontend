@@ -12,6 +12,7 @@ class Contacts extends Component{
     render(){
         return(
             <div>
+                <BreadcrumbsItem to="/public/:id?action=test">Contact</BreadcrumbsItem>
                 TODO
             </div>
         );

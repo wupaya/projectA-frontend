@@ -7,21 +7,41 @@ import {Dashboard} from './dashboard';
 import {ThroughProvider} from 'react-through';
 
 class App extends Component {
+  state = {};
+  componentDidMount() {
+    var session_token = Cookies.get('token')
+    
+    if(session_token!=null)
+    {
+        this.setState({
+            isLoggedIn:true
+        });
+
+    }else{
+        this.setState({
+            isLoggedIn:false
+        });
+    }
+}
     render(){
       const institute_page = React.lazy(() => import('./institute/'+ 'ins_page'));
-        return(
-          
-          <ThroughProvider>
-            <Suspense fallback={<div>Loading...</div>}>
-              <Router>
-              <Route exact path="/" component={Home} />
-              <Route path="/public/:id" component={institute_page} />
-              <Route path="/private" component={Dashboard} />
-              </Router>
-            </Suspense>
-          </ThroughProvider>
-         
-        );
+      var HomeView = <Home/>;
+      if(this.state.isLoggedIn){
+          HomeView  = <Dashboard />
+      }
+      return(
+        
+        <ThroughProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Router>
+            <Route exact path="/" component={Home} />
+            <Route path="/public/:id" component={institute_page} />
+            {/*<Route path="/private" component={Dashboard} /> */}
+            </Router>
+          </Suspense>
+        </ThroughProvider>
+        
+      );
     }
 }
 
@@ -29,27 +49,15 @@ class Home extends Component {
 
     constructor(props){
         super(props);
-        //this.afterlogin = this.afterlogin.bind(this);
-
-
     }
 
-	removeCharacter = index => {
-		const { characters } = this.state;
-
-		this.setState({
-			characters: characters.filter((character, i) => {
-				return i !== index;
-			})
-		});
-	}
     state = {
 			data: [
 			],
-            show_login_form:true,
-            show_signup_form:false,
-            show_signup_button: true,
-            show_login_button:false
+      show_login_form:true,
+      show_signup_form:false,
+      show_signup_button: true,
+      show_login_button:false
 		};
 	    // Code is invoked after the component is mounted/inserted into the DOM tree.
     componentDidMount() {
@@ -84,20 +92,20 @@ class Home extends Component {
     dashboad(data){
         console.log("dashboad");
         this.setState({show_login_form:false,
-            show_signup_form:false,
-            show_signup_button: false,
-            show_login_button:false,
-            data:data});
+        show_signup_form:false,
+        show_signup_button: false,
+        show_login_button:false,
+        data:data});
     }
 
     onLoginOrSignup(data){
         Cookies.set('token', data.data.token, { expires: 1 });
         this.setState({show_login_form:false,
-            show_signup_form:false,
-            show_signup_button: false,
-            show_login_button:false,
-            data:data,
-            isLoggedIn:true});
+        show_signup_form:false,
+        show_signup_button: false,
+        show_login_button:false,
+        data:data,
+        isLoggedIn:true});
     }
 
     onPageCreateHandler(data){
@@ -116,15 +124,18 @@ class Home extends Component {
 
         var sign_login_button_text = this.state.show_login_form ? "Sign up": "Log in";
         var login_signup_button = this.state.isLoggedIn ? "" : <button onClick={() => this.signup_toggle()} className="btn btn-primary mb-2">{sign_login_button_text}</button>;
-
+/*
         if(this.state.isLoggedIn){
+          //no need to redirect
             return (
             <Redirect to='/private/'/>
             );
-        }
+        } */
         if(this.state.isLoggedIn){
-            var dashboad = <Dashboard onCreatePage={this.onPageCreateHandler.bind(this)} />;
-            var message = JSON.stringify(pageCreateResponse);
+
+          //TODO: report parent component
+          var dashboad = <Dashboard onCreatePage={this.onPageCreateHandler.bind(this)} />;
+          var message = JSON.stringify(pageCreateResponse);
         }
 
 
@@ -137,29 +148,23 @@ class Home extends Component {
 				<h1>Welcome to IMS</h1>
 				<p>IMS helps to find and manage your information</p>
 			</div>
-            <p>{message}</p>
-            <div className="row row-no-gutters">
-            <div className="col-sm-4">
-            <RecentlyVisited/>
-            </div>
-            <div className="col-sm-8">
-            <p>To find information enter keyword below</p>
-            {<Search/>}
-            <p>To manage information login to your account</p>
+      <p>{message}</p>
+      <div className="row row-no-gutters">
+      <div className="col-sm-4">
+      <RecentlyVisited/>
+      </div>
+      <div className="col-sm-8">
+      <p>To find information enter keyword below</p>
+      {<Search/>}
+      <p>To manage information login to your account</p>
 			{login_form}
-            <p>Click signup button to create account if you have no account yet. It's free.</p>
-            {login_signup_button}
-            {signup_form}
-
-
-            </div>
-            </div>
-            <Footer/>
-
-
-            </div>
-
-
+      <p>Click signup button to create account if you have no account yet. It's free.</p>
+      {login_signup_button}
+      {signup_form}
+      </div>
+      </div>
+      <Footer/>
+      </div>
         );
     }
 }

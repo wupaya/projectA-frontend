@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-
+import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 export class ShowStuffList extends Component{
 
@@ -11,6 +11,7 @@ export class ShowStuffList extends Component{
       var id = "BRUR";
         return(
             <div>
+              <BreadcrumbsItem to="/private/service/eduman/brur?action=details_console_tag">Show stuff</BreadcrumbsItem>
             <div>
             </div>
                 <p>Showing the stuffs who are active</p>

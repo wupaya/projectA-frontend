@@ -7,47 +7,6 @@ import {NavBar, Footer} from '../commons';
 import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 class Page1 extends Component{
-
-    onLogOutHangle(){
-      Cookies.remove("token");
-    }
-
-    render(){
-        //let {page} = this.state;
-        //{this.props.match.params.id}
-        let {location} = this.props;
-        let params = new URLSearchParams(location.search);
-        var action = params.get("action")
-        var viewid = params.get("viewid")
-
-        var View = <PageBase />;
-
-        if(action=="page"){
-            if(viewid==null){
-              return <p>Something went wrong.</p>
-            }
-            View = React.lazy(() => import('./page/'+ viewid));
-        }
-        return(
-        <div className="container">
-            <NavBar onLogOut={this.onLogOutHangle.bind(this)} />
-
-              <Suspense fallback={<div>Loading...</div>}>
-                  <View match={this.props.match}/>
-              </Suspense>
-
-            <div className="row">
-                <Footer />
-            </div>
-        </div>
-        );
-    }
-}
-
-const Page = withRouter(Page1);
-export default Page;
-
-class PageBase extends Component{
   state ={
     page:{
       nuid:1231,
@@ -67,36 +26,94 @@ class PageBase extends Component{
       {nuid: 1,comid:"contact", description:"Contact us"},
       {nuid: 2,comid:"gallery", description:"Visit galleries"},
       {nuid: 3,comid:"events", description:"Show events"},
-      {nuid: 4,comid:"notices", description:"Show recent notices"},
-      {nuid: 5,comid:"services", description:"Show services for parents"},
-      {nuid: 6,comid:"alumni", description:"Alumni"},
-      {nuid: 7,comid:"career", description:"Career offers"}
+      {nuid: 4,comid:"notices", description:"Can't find what I'm looking for."}
     ]
     }
   }
+    onLogOutHangle(){
+      Cookies.remove("token");
+    }
+
+    render(){
+        let {page} = this.state;
+        //{this.props.match.params.id}
+        
+        return(
+        <div className="container">
+            <NavBar onLogOut={this.onLogOutHangle.bind(this)} />
+            <PageHeader pagedata={page}/>
+            <ViewSelectorRouter pagedata={page}/>
+            <div className="row">
+                <Footer />
+            </div>
+        </div>
+        );
+    }
+}
+
+const Page = withRouter(Page1);
+export default Page;
+
+class ViewSelector extends Component{
   render(){
-    let {page} = this.state;
+        let {location, pagedata} = this.props;
+        let params = new URLSearchParams(location.search);
+        var action = params.get("action")
+        var viewid = params.get("viewid")
+
+        var baseview = "";
+
+        if(action=="page"){
+            if(viewid==null){
+              return <p>Something went wrong.</p>
+            }
+            const View = React.lazy(() => import('./page/'+ viewid));
+            return(<Suspense fallback={<div>Loading...</div>}>
+                  <View match={this.props.match}/>
+              </Suspense>)
+        }
+        return <PageBase pagedata={pagedata}/>;
+        
+  }
+}
+
+const ViewSelectorRouter = withRouter(ViewSelector);
+
+class PageHeader extends Component{
+  render(){
+    let {pagedata} = this.props;
+    var page = pagedata;
+    return(
+      <div className="row">
+      <div class="col-lg-2">
+          <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text></svg>
+      </div>
+      <div class="col-lg-10">
+        <h2>{page.title}</h2>
+        <p>{page.subtitle}</p>
+        <hr />
+        <Breadcrumbs
+          separator={<b> / </b>}
+          item={NavLink}
+          finalItem={"b"}
+          finalProps={{
+            style: {}
+          }}
+        />
+        <BreadcrumbsItem to="/public/:id">Base</BreadcrumbsItem>
+      </div>
+    </div>
+    )
+  }
+}
+
+class PageBase extends Component{
+
+  render(){
+    let {pagedata} = this.props;
+    var page = pagedata;
     return(
       <div>
-            <div className="row">
-              <div class="col-lg-2">
-                  <svg class="bd-placeholder-img img-thumbnail" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera: 200x200"><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text></svg>
-              </div>
-              <div class="col-lg-10">
-                <h2>{page.title}</h2>
-                <p>{page.subtitle}</p>
-                <hr />
-                <Breadcrumbs
-                  separator={<b> / </b>}
-                  item={NavLink}
-                  finalItem={"b"}
-                  finalProps={{
-                    style: {}
-                  }}
-                />
-                <BreadcrumbsItem to="/public/:id">Base</BreadcrumbsItem>
-              </div>
-            </div>
             <div className="row">
               <div class="col-lg-12">
                 <hr />
