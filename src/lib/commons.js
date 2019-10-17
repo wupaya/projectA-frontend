@@ -3,30 +3,6 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { withRouter} from "react-router-dom";
-//import {Page} from './page';
-import {Dashboard} from './dashboard';
-
-export class Layout extends Component {
-
-    render(){
-      const Page = React.lazy(() => import('./institute/'+ 'ins_page'));
-        var service = this.props.match.params.id
-        var view = <Page />;
-        if(service == "dashboard"){
-           var view = <Dashboard />;
-        }
-
-        return(
-        <div className="container">
-            <NavBar/>
-            {view}
-            <div className="row">
-                <Footer />
-            </div>
-        </div>
-        );
-    }
-}
 
 export class NavBar_org extends Component{
   constructor(props){
@@ -173,7 +149,7 @@ export class RecentlyVisited extends Component{
             <div>
             <p>Recently Visited</p>
             <ol>
-            <li><Link to="/public/begum_rokey_univ">Begum Rokeya University</Link></li>
+            <li><Link to="/begum_rokey_univ">Begum Rokeya University</Link></li>
             <li><a href="#">BUET</a></li>
             <li><a href="#">Dhaka University</a></li>
             <li><a href="#">Rangpur Govt. College</a></li>
@@ -182,25 +158,3 @@ export class RecentlyVisited extends Component{
          );
     }
 }
-
-
-class BottonNavigation extends Component{
-    constructor(props){
-       super(props);
-       this.goBack = this.goBack.bind(this); // i think you are missing this
-    }
-
-    goBack(){
-        this.props.history.go(-1);
-    }
-
-
-       render(){
-           var message = "Go Back";
-           return(
-                <button onClick={this.goBack} className="">Go Back</button>
-           );
-       }
-}
-//export default withRouter(BottonNavigation);
-const ShowTheLocationWithRouter = withRouter(BottonNavigation);

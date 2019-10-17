@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import { withRouter} from "react-router-dom";
-import {NavBar, Footer} from '../commons';
+import {NavBar, Footer} from '../lib/commons';
 import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 
 class Page1 extends Component{

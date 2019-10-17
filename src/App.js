@@ -1,46 +1,24 @@
 import React, {Component, Suspense} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
-import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
-import {Layout, Footer, RecentlyVisited} from './commons';
+import { BrowserRouter as Router, Route, Link, Redirect, Switch, BrowserRouter } from "react-router-dom";
+import {Footer, RecentlyVisited} from './lib/commons';
 import {Dashboard} from './dashboard';
 import {ThroughProvider} from 'react-through';
+import {withRouter} from 'react-router-dom';
 
 class App extends Component {
-  state = {};
-  componentDidMount() {
-    var session_token = Cookies.get('token')
-    
-    if(session_token!=null)
-    {
-        this.setState({
-            isLoggedIn:true
-        });
-
-    }else{
-        this.setState({
-            isLoggedIn:false
-        });
-    }
-}
     render(){
-      const institute_page = React.lazy(() => import('./institute/'+ 'ins_page'));
-      var HomeView = <Home/>;
-      if(this.state.isLoggedIn){
-          HomeView  = <Dashboard />
-      }
       return(
-        
         <ThroughProvider>
           <Suspense fallback={<div>Loading...</div>}>
-            <Router>
-            <Route exact path="/" component={Home} />
-            <Route path="/public/:id" component={institute_page} />
-            {/*<Route path="/private" component={Dashboard} /> */}
-            </Router>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/:pageid?" component={Home} />
+            </Switch>
+          </BrowserRouter>
           </Suspense>
         </ThroughProvider>
-        
       );
     }
 }
@@ -76,6 +54,7 @@ class Home extends Component {
             });
         }
     }
+
     signup_toggle(){
         if(this.state.show_signup_form)
             this.setState({show_login_form:true,
@@ -89,15 +68,6 @@ class Home extends Component {
             show_login_button:true});
     }
 
-    dashboad(data){
-        console.log("dashboad");
-        this.setState({show_login_form:false,
-        show_signup_form:false,
-        show_signup_button: false,
-        show_login_button:false,
-        data:data});
-    }
-
     onLoginOrSignup(data){
         Cookies.set('token', data.data.token, { expires: 1 });
         this.setState({show_login_form:false,
@@ -108,8 +78,9 @@ class Home extends Component {
         isLoggedIn:true});
     }
 
-    onPageCreateHandler(data){
-        this.setState({pageCreateResponse:data});
+    //handle logout from dashborad
+    onLogoutHandler(data){
+        this.setState({isLoggedIn:false});
     }
 
 
@@ -124,18 +95,18 @@ class Home extends Component {
 
         var sign_login_button_text = this.state.show_login_form ? "Sign up": "Log in";
         var login_signup_button = this.state.isLoggedIn ? "" : <button onClick={() => this.signup_toggle()} className="btn btn-primary mb-2">{sign_login_button_text}</button>;
-/*
-        if(this.state.isLoggedIn){
-          //no need to redirect
-            return (
-            <Redirect to='/private/'/>
-            );
-        } */
-        if(this.state.isLoggedIn){
 
-          //TODO: report parent component
-          var dashboad = <Dashboard onCreatePage={this.onPageCreateHandler.bind(this)} />;
-          var message = JSON.stringify(pageCreateResponse);
+        var message = JSON.stringify(pageCreateResponse);
+
+        let{pageid} = this.props.match.params;
+        if(pageid != null && pageid.length>5){
+          const Institute_page = React.lazy(() => import('./institute/'+ pageid));
+          return(<Institute_page/>);
+        }
+       
+        if(this.state.isLoggedIn){
+          const DashboradWithRouter = withRouter(Dashboard);
+          return( <DashboradWithRouter onLogOut={this.onLogoutHandler.bind(this)} />);
         }
 
 
@@ -375,6 +346,5 @@ class SignUp extends Component{
         );
     }
 }
-
 
 export default App;

@@ -48,7 +48,7 @@ class Welcome extends Component{
             <ul>
             {
              associated.map((entry, index) => {
-                return <li key={index}><Link to={{ pathname: "/private/service/eduman/"+entry}}>{entry}</Link></li>
+                return <li key={index}><Link to={{ pathname: "/s/eduman/"+entry}}>{entry}</Link></li>
              })
             }
             </ul>

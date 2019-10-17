@@ -12,7 +12,7 @@ class InstituteDashboard extends Component{
 
     render(){
         let {componentid} = this.props.match.params;
-        //console.log('component id'+JSON.stringify(this.props.match))
+        console.log('component id'+JSON.stringify(this.props.match))
         let {id} = this.props.match.params;
         //console.log(' id'+id)
         const Welcome = React.lazy(() => import('./'+ 'welcome'));
@@ -25,7 +25,7 @@ class InstituteDashboard extends Component{
         return(
             <div>
             <BreadcrumbsItem
-      to='/private/service/eduman'
+      to='/s/eduman'
       icon='account-box'
     >
       EDUMAN
@@ -33,9 +33,9 @@ class InstituteDashboard extends Component{
              <Suspense fallback={<div>Loading...</div>}>
             <Switch>
                 
-                <Route path="/private/service/eduman/:id" component={TaskGroup}/>
+                <Route path="/s/eduman/:id" component={TaskGroup}/>
                 <Route exact
-                  path='/private/service/eduman'
+                  path='/s/eduman'
                   render={(props) => <Welcome {...props} associated={this.state.associated} />}
                 /> 
                 
@@ -64,12 +64,12 @@ class TaskGroup extends Component{
           return(
 
               <div>
-              <BreadcrumbsItem to={"/private/service/eduman/"+id}>{id}</BreadcrumbsItem>
+              <BreadcrumbsItem to={"/s/eduman/"+id}>{id}</BreadcrumbsItem>
               <h3>Now managing: {id}</h3>
               <hr />
               <Switch>
-              <Route path="/private/service/eduman/:id/tg/:componentid" component={TagDetails}/>
-              <Route exact path="/private/service/eduman/:id" component={Tags}/>
+              <Route path="/s/eduman/:id/tg/:componentid" component={TagDetails}/>
+              <Route exact path="/s/eduman/:id" component={Tags}/>
               </Switch>
               </div>
           );
@@ -90,7 +90,7 @@ class Tags extends Component{
 
   generate_link_ref(tagid, nice_tag_id){
     let {id} = this.props.match.params;
-  return { pathname: "/private/service/eduman/"+id+"/tg/"+nice_tag_id};
+  return { pathname: "/s/eduman/"+id+"/tg/"+nice_tag_id};
   }
   render(){
     let {console_tags} = this.state;
@@ -105,7 +105,7 @@ class Tags extends Component{
               })}
 
               <hr />
-              <Link to="/private/service/eduman/:id/ins_people">Help me to start</Link>
+              <Link to="/s/eduman/:id/ins_people">Help me to start</Link>
               </div>
     )
   }
