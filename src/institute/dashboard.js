@@ -32,13 +32,8 @@ class InstituteDashboard extends Component{
     </BreadcrumbsItem>
              <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-                
                 <Route path="/s/eduman/:id" component={TaskGroup}/>
-                <Route exact
-                  path='/s/eduman'
-                  render={(props) => <Welcome {...props} associated={this.state.associated} />}
-                /> 
-                
+                <Route exact path='/s/eduman' render={(props) => <Welcome {...props} associated={this.state.associated} />} />                 
             </Switch>
              </Suspense>
             </div>
@@ -68,7 +63,7 @@ class TaskGroup extends Component{
               <h3>Now managing: {id}</h3>
               <hr />
               <Switch>
-              <Route path="/s/eduman/:id/tg/:componentid" component={TagDetails}/>
+              <Route path="/s/eduman/:id/tg/:tgid" component={TagDetails}/>
               <Route exact path="/s/eduman/:id" component={Tags}/>
               </Switch>
               </div>
@@ -77,6 +72,26 @@ class TaskGroup extends Component{
 }
 
 class Tags extends Component{
+  
+  state = {
+    console_tags:[
+      {tag_id:1, tag_nice_id:"ins_tag_class",title:"Class Management",description:"Manage thing in classroom such as take attendance, report parent"},
+      {tag_id:2, tag_nice_id:"ins_notifications",title:"Notifications",description:"Manage notifications"},
+      {tag_id:2, tag_nice_id:"ins_notifications",title:"Analysis",description:"Get various analysis"},
+    ]
+  }
+  
+  /*
+  state = {
+    console_tags:[
+      {tag_id:1, tag_nice_id:"ins_reports",title:"Reports",description:"Get reports about on your children."},
+      {tag_id:2, tag_nice_id:"ins_notifications",title:"Notifications",description:"Manage notifications"},
+      {tag_id:2, tag_nice_id:"ins_notifications",title:"Results",description:"Manage results"},
+    ]
+  } */
+
+  /*
+  for admin
   state = {
     console_tags:[
       {tag_id:1, tag_nice_id:"ins_people",title:"Manage People",description:"Manage all of your people here"},
@@ -87,6 +102,8 @@ class Tags extends Component{
   {tag_id:6,tag_nice_id:"ins_tag_class",title:"Manage classroom",description:"Manage classroom"}
     ]
   }
+  
+  */
 
   generate_link_ref(tagid, nice_tag_id){
     let {id} = this.props.match.params;
@@ -113,12 +130,12 @@ class Tags extends Component{
 
 class TagDetails extends Component{
     render(){
-      let {componentid} = this.props.match.params;
-        console.log('component id'+JSON.stringify(this.props.match))
-        if(componentid==null){
+      let {tgid} = this.props.match.params;
+        console.log('Tag details');
+        if(tgid==null){
           return ("something went wrong");
         }
-        const View = React.lazy(() => import('./'+ componentid));
+        const View = React.lazy(() => import('./'+ tgid));
         return <div>
         <Suspense fallback={<div>Loading...</div>}>
             <View match={this.props.match}/>

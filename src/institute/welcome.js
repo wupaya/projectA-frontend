@@ -43,15 +43,17 @@ class Welcome extends Component{
         </div>;
 
         var welcome_back = <div>
-            <p>Your associated institutes</p>
+            <p>Your are associated with</p>
             <hr />
             <ul>
             {
              associated.map((entry, index) => {
-                return <li key={index}><Link to={{ pathname: "/s/eduman/"+entry}}>{entry}</Link></li>
+                return <li key={index}><Link to={{ pathname: "/s/eduman/"+entry}}>{entry}</Link> as Headmaster</li>
              })
             }
             </ul>
+            <hr />
+            <p><Link to="#">Show join request</Link></p>
         </div>;
 
 

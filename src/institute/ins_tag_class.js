@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
@@ -10,43 +10,66 @@ import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 class ClassManagementTag extends Component{
   state = {
     tasks:[
-      {taskid:3, task_nice_id:"ins_task_attendence",task_description:"Take attendence"},
-      {taskid:4, task_nice_id:"ins_task_edit_address",task_description:"Add or change address"},
-      {taskid:13, task_nice_id:"ins_task_edit_contact",task_description:"Add or change contact"},
-      {taskid:15, task_nice_id:"ins_task_show_preview",task_description:"Show page in preview mode"},
-      {taskid:16, task_nice_id:"ins_task_show_page",task_description:"Go to page"}
+      {taskid:3, task_nice_id:"ins_task_attendence",task_description:"Take attendence"}
     ],
     tag_meta:{
       public_pages:[
-        {title:"Begum Rokeya University, Rangpur", link:"/public/begum_rokey_univ"}
+        {title:"Begum Rokeya University, Rangpur", link:"/begum_rokey_univ"}
       ]
     }
   }
     render(){
-        let {id} = this.props;
+        let {id} = this.props.match.params;
+        let {tgid} = this.props.match.params;
         let {tasks} = this.state;
         let {tag_meta} = this.state;
 
         return(
             <div>
-                <BreadcrumbsItem to="/private/service/eduman/:id">Manage Public Page</BreadcrumbsItem>
-                <p>You are associated with the following page.</p>
-                <ul>
-                {tag_meta.public_pages.map((key,index)=>{return <li><Link to={{ pathname: key["link"]}}>{key["title"]}</Link></li>})}
-                </ul>
-                <hr />
+                
                 <p>What you would like to do?</p>
                 <ul>
-                  {tasks.map((key,index)=>{return <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=task&taskid="+key["task_nice_id"] }}>{key["task_description"]}</Link></li>})}
+                  {tasks.map((key,index)=>{return <li><Link to={{ pathname: "/s/eduman/"+id+"/tg/"+tgid+"/t/"+key["task_nice_id"]}}>{key["task_description"]}</Link></li>})}
                 </ul>
                 <hr />
-                <p><Link to="#">I would like to know how the stuffs are doing</Link></p>
             </div>
         );
-
-
-
     }
 }
 
-export default ClassManagementTag;
+class TagLoader extends Component{
+  
+  render(){
+    let {id,tgid,taskid} = this.props.match.params;
+
+    return(
+      <duv>
+        <BreadcrumbsItem to={"/s/eduman/"+id+"/tg/"+tgid}>Class Management</BreadcrumbsItem>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+                <Route exact path="/s/eduman/:id/tg/:tgid" component={ClassManagementTag}/>
+                <Route path="/s/eduman/:id/tg/:tgid/t/:taskid" component={TaskLoader}/>
+            </Switch>
+        </Suspense>
+      </duv>
+    );
+  }
+}
+
+
+class TaskLoader extends Component{
+  render(){
+      let {taskid} = this.props.match.params;
+      if(taskid==null){
+        return ("something went wrong");
+      }
+      const View = React.lazy(() => import('./'+ taskid));
+      return <div>
+      <Suspense fallback={<div>Loading...</div>}>
+          <View match={this.props.match}/>
+      </Suspense>
+    </div>;
+  }
+}
+
+export default TagLoader;
