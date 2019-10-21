@@ -28,3 +28,6 @@ export class ManageNotice extends Component{
         );
     }
 }
+
+
+export default ManageNotice;

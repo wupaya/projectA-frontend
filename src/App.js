@@ -7,6 +7,8 @@ import {Dashboard} from './dashboard';
 import {ThroughProvider} from 'react-through';
 import {withRouter} from 'react-router-dom';
 
+const DEBUG = true;
+
 class App extends Component {
     render(){
       return(
@@ -50,7 +52,7 @@ class Home extends Component {
 
         }else{
             this.setState({
-                isLoggedIn:false
+                isLoggedIn:true
             });
         }
     }
@@ -81,6 +83,11 @@ class Home extends Component {
     //handle logout from dashborad
     onLogoutHandler(data){
         this.setState({isLoggedIn:false});
+    }
+
+
+    if(DEBUG){
+      this.setState({isLoggedIn:true});
     }
 
 

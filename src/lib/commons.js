@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
 import { withRouter} from "react-router-dom";
 
 export class NavBar_org extends Component{
@@ -28,6 +28,12 @@ export class NavBar_org extends Component{
           this.setState({
               isLoggedIn:false
           });
+      }
+
+      if(config.DEBUG){
+        this.setState({
+          isLoggedIn:true
+      });
       }
   }
 
@@ -157,4 +163,40 @@ export class RecentlyVisited extends Component{
             </div>
          );
     }
+}
+
+export class config{
+   DEBUG = true;
+}
+
+class TaskLoader extends Component{
+  render(){
+      let {taskid} = this.props.match.params;
+      if(taskid==null){
+        return ("something went wrong");
+      }
+      const View = React.lazy(() => import('./'+ taskid));
+      return <div>
+      <Suspense fallback={<div>Loading...</div>}>
+          <View match={this.props.match}/>
+      </Suspense>
+    </div>;
+  }
+}
+
+export class TagLoader extends Component{  
+  render(){
+    let {id,tgid} = this.props.match.params;
+    const View = React.lazy(() => import('./' + tgid));
+    return(
+      <duv>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+                <Route path="/s/eduman/:id/tg/:tgid" component={View}/>
+                <Route path="/s/eduman/:id/tg/:tgid/t/:taskid" component={TaskLoader}/>
+            </Switch>
+        </Suspense>
+      </duv>
+    );
+  }
 }
