@@ -91,7 +91,7 @@ class Search extends Component{
             if(search_result.length)
                 result = <ul>{search_result.map((key, index)=>{return<li></li>})}</ul>;
             else{
-                result = <Link to="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page">create page</Link>
+                result = <Link to="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page">Create Institute Public Page</Link>
             }
         }
         return (

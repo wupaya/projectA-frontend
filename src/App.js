@@ -106,9 +106,11 @@ class Home extends Component {
         var message = JSON.stringify(pageCreateResponse);
 
         let{pageid} = this.props.match.params;
+
+        //Load public page
         if(pageid != null && pageid.length>5){
-          const Institute_page = React.lazy(() => import('./institute/'+ pageid));
-          return(<Institute_page/>);
+          const Institute_page = React.lazy(() => import('./public_page_loader'));
+          return(<Institute_page pageid={pageid}/>);
         }
        
         if(this.state.isLoggedIn){

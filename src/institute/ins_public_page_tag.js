@@ -18,7 +18,7 @@ class PublicPageTag extends Component{
     ],
     tag_meta:{
       public_pages:[
-        {title:"Begum Rokeya University, Rangpur", link:"/public/begum_rokey_univ"}
+        {title:"Begum Rokeya University, Rangpur", link:"/begum_rokey_univ"}
       ]
     }
   }
@@ -29,18 +29,15 @@ class PublicPageTag extends Component{
 
         return(
             <div>
-                <BreadcrumbsItem to="/private/service/eduman/:id">Manage Public Page</BreadcrumbsItem>
-                <p>You are associated with the following page.</p>
-                <ul>
-                {tag_meta.public_pages.map((key,index)=>{return <li><Link to={{ pathname: key["link"]}}>{key["title"]}</Link></li>})}
-                </ul>
+                <BreadcrumbsItem to={"/s/eduman/"+id}>Manage Public Page</BreadcrumbsItem>
+                <p>In this section you will be able to manage your institute public page.</p>
                 <hr />
                 <p>What you would like to do?</p>
                 <ul>
-                  {tasks.map((key,index)=>{return <li><Link to={{ pathname: "/private/service/eduman/"+id, search: "?action=task&taskid="+key["task_nice_id"] }}>{key["task_description"]}</Link></li>})}
+                  {tasks.map((key,index)=>{return <li><Link to={{ pathname: "/s/eduman/"+id+"/tg/"+"", search: "?action=task&taskid="+key["task_nice_id"] }}>{key["task_description"]}</Link></li>})}
                 </ul>
                 <hr />
-                <p><Link to="#">I would like to know how the stuffs are doing</Link></p>
+                <p><Link to="/begum_rokeya_university">Visit public page</Link></p>
             </div>
         );
 

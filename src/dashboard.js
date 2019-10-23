@@ -11,23 +11,15 @@ export class Dashboard extends Component{
 
     state ={show_page_create_form:false, message:"Create a page",isLoggedIn:true}
     constructor(props){
-
         super(props);
-
     }
-
-
-
     onLogOutHangle(){
        this.setState({isLoggedIn:false});
        this.props.onLogOut();
        console.log("working inside");
     }
-
-
-
     render(){
-        //lazy load
+        
         const InstituteDashboard = React.lazy(() => import('./institute/'+ 'dashboard'));
         const { match } = this.props;
         console.log(match.url)
@@ -103,7 +95,6 @@ class DashboardHome extends Component{
     }
 }
 
-
 class ManagementTaskShortcut extends Component{
     render(){
         let {name} = this.props;
@@ -135,10 +126,6 @@ class Search extends Component{
         };
 
     }
-
-    // onlogin_demo(data){
-        // this.props.onlogin(data);
-    // }
 
     render(){
         const { data } = this.state
