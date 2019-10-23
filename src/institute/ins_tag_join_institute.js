@@ -29,40 +29,29 @@ class JoinInstituteTag extends Component{
     
     render(){
         const CreateInstitutePageForm = React.lazy(() => import('./' + 'ins_task_create_page'));
-        var button_text = this.state.show_page_create_form ? "" : <button  onClick={this.toggle_page_create.bind(this)}>Create Page</button>;
-        var page_create_form = this.state.show_page_create_form ? <CreateInstitutePageForm onCancel={this.onCancelHandle.bind(this)} onCreatePage={this.onCreatePageHandle.bind(this)}/> : "";
         let {associated} =  this.props;
         console.log(associated);
-        var welcome = <div>
-            <p>There are two ways to join an institute.</p>
-            <hr />
-            <p>You can join your institute by submitting a join request. First find your page. if not found you can create one.</p>
-            <Search />
-            <hr />
-            <p>Or if you already have a invitation to join your institute.</p>
-            <form>
-              <div className="form-row align-items-center">
-                <div className="col-auto">
-                  <input type="text" className="form-control mb-2" id="key" placeholder="Enter invitation code"  />
-                </div>
-                <div className="col-auto">
-                  <button onClick={(e) => this.baz(e)} type="submit" className="btn btn-primary mb-2">Find</button>
-                </div>
-              </div>
-            </form>
-        </div>;
 
         return(
+          <div>
+          <BreadcrumbsItem to={"/s/eduman/tg/"+"ins_tag_join_institute"}>Join Institute</BreadcrumbsItem>
           <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path={"/s/eduman/tg/"+"ins_tag_join_institute"}>
-                <div><BreadcrumbsItem to={"/s/eduman/tg/"+"ins_tag_join_institute"}>Join Institute</BreadcrumbsItem>
-                {welcome}
-                </div>
+            <div>
+              <p>There are two ways to join an institute.</p>
+              <hr />
+              <p>You can join your institute by submitting a join request. First find your page. if not found you can create one.</p>
+              <Search />
+              <hr />
+              <p>Or if you already have a invitation to join your institute.</p>
+              <JoinByInvitation/>
+            </div>
             </Route>
             <Route path="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page" component={CreateInstitutePageForm} />
           </Switch>
           </Suspense>
+          </div>
         );
     }
 }
@@ -115,5 +104,23 @@ class Search extends Component{
     }
 }
 
+class JoinByInvitation extends Component{
+  render(){
+    return(
+      <div>
+          <form>
+              <div className="form-row align-items-center">
+                <div className="col-auto">
+                  <input type="text" className="form-control mb-2" id="key" placeholder="Enter invitation code"  />
+                </div>
+                <div className="col-auto">
+                  <button onClick={(e) => this.baz(e)} type="submit" className="btn btn-primary mb-2">Find</button>
+                </div>
+              </div>
+            </form>
+      </div>
+    );
+  }
+}
 
 export default JoinInstituteTag;

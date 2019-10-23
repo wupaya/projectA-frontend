@@ -98,6 +98,7 @@ class Tags extends Component {
   }
 
   /*
+  //for teacher
   state = {
     console_tags:[
       {tag_id:1, tag_nice_id:"ins_reports",title:"Reports",description:"Get reports about on your children."},
@@ -107,7 +108,7 @@ class Tags extends Component {
   } */
 
   /*
-  for admin
+  //for admin
   state = {
     console_tags:[
       {tag_id:1, tag_nice_id:"ins_people",title:"Manage People",description:"Manage all of your people here"},
@@ -125,13 +126,14 @@ class Tags extends Component {
     let { id } = this.props.match.params;
     return { pathname: "/s/eduman/" + id + "/tg/" + nice_tag_id };
   }
+
   render() {
     let { console_tags } = this.state;
     
     return (
       <div>
         <Switch>
-        <Route exact path="/s/eduman">
+        <Route exact path="/s/eduman/:id">
         <p>What you would like to do?</p>
         {console_tags.map((key, index) => {
           return <div class="p-2 bd-highlight">
@@ -139,7 +141,6 @@ class Tags extends Component {
             <p class="card-text">{key["description"]}</p>
           </div>;
         })}
-
         <hr />
         <Link to="#">Help me to start</Link>
         </Route>
