@@ -9,14 +9,20 @@ import { TaskLoader } from './ins_common_lib';
 
 /*This is the service reception. It shows associated institute lists and allow creating new page.*/
 class InstituteDashboard extends Component {
-
+  
   state = { 
     associated: [
       {id: 1, short_name:"BRUR", long_name:"Begum Rokeya University, Rangpur", designation:"Parent"},
       {id: 2, short_name:"RGC", long_name:"Rangpur Government College, Rangpur", designation:"Parent"},
     ]
   }
+  /*
 
+  state = { 
+    associated: []
+  }
+  */
+ 
   render() {
     let { componentid } = this.props.match.params;
     console.log('component id' + JSON.stringify(this.props.match))
