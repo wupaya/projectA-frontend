@@ -39,13 +39,11 @@ class JoinInstituteTag extends Component{
           <Switch>
             <Route exact path={"/s/eduman/tg/"+"ins_tag_join_institute"}>
             <div>
-              <p>There are two ways to join an institute.</p>
-              <hr />
               <p>You can join your institute by submitting a join request. First find your page. if not found you can create one.</p>
               <Search />
-              <hr />
+              {/*<hr />
               <p>Or if you already have a invitation to join your institute.</p>
-              <JoinByInvitation/>
+              <JoinByInvitation/> */}
             </div>
             </Route>
             <Route path="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page" component={CreateInstitutePageForm} />
@@ -67,14 +65,16 @@ class Search extends Component{
         this.state = {
             data: {},
             login_in_progress:false,
-            search_result:[],
+            search_result:[
+                {id:"brur_rangpur", title:"Begum Rokeya University"},
+            ],
             show_search_result: true
         };
     }
 
     render(){
-        const { login_in_progress } = this.state
-        var login_form = <form>
+        const { login_in_progress } = this.state;
+        var search_from = <form>
               <div className="form-row align-items-center">
                 <div className="col-auto">
                   <input type="text" className="form-control mb-2" id="key" placeholder="Enter your institute name"  />
@@ -89,14 +89,14 @@ class Search extends Component{
         var result = "";
         if(this.state.show_search_result){
             if(search_result.length)
-                result = <ul>{search_result.map((key, index)=>{return<li></li>})}</ul>;
+                result = <ul>{search_result.map((key, index)=>{return<li><Link to={"/"+key["id"]}>{key["title"]}</Link></li>})}</ul>;
             else{
-                result = <Link to="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page">create page</Link>
+                result = <Link to="/s/eduman/tg/ins_tag_join_institute/t/ins_task_create_page">Create Institute Public Page</Link>
             }
         }
         return (
             <div>
-            {login_form}
+            {search_from}
             {loader_text}
             {result}
             </div>

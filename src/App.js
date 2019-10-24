@@ -2,10 +2,11 @@ import React, { Component, Suspense } from 'react';
 import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch, BrowserRouter } from "react-router-dom";
-import { Footer, RecentlyVisited } from './lib/commons';
 import { Dashboard } from './dashboard';
 import { ThroughProvider } from 'react-through';
 import { withRouter } from 'react-router-dom';
+import { NavBar, Footer, RecentlyVisited } from './lib/commons';
+
 
 const DEBUG = true;
 
@@ -112,32 +113,40 @@ class Home extends Component {
       return (<Institute_page />);
     }
 
-    if (this.state.isLoggedIn) {
-      const DashboradWithRouter = withRouter(Dashboard);
-      return (<DashboradWithRouter onLogOut={this.onLogoutHandler.bind(this)} />);
+    if (pageid == null && !this.state.isLoggedIn) {
+      return (
+        <div>
+          <div className="jumbotron">
+            <h1>Welcome to IMS</h1>
+            <p>IMS helps to find and manage your information</p>
+          </div>
+          <div className="row row-no-gutters">
+            <div className="col-sm-4">
+              <RecentlyVisited />
+              <p>To find information enter keyword below</p>
+              {<Search />}
+            </div>
+            <div className="col-sm-8">
+              
+              {login_form}
+              {signup_form}
+              <hr />
+              {login_signup_button}
+            </div>
+          </div>
+          <Footer />
+      </div>
+      );
     }
 
+    const DashboradWithRouter = withRouter(Dashboard);
     return (
-      <div>
-        <div className="jumbotron">
-          <h1>Welcome to IMS</h1>
-          <p>IMS helps to find and manage your information</p>
+      <div className="container">
+        <NavBar onLogOut={this.onLogoutHandler.bind(this)} isLoggedIn={this.state.isLoggedIn} />
+        <DashboradWithRouter onLogOut={this.onLogoutHandler.bind(this)} />
+        <div className="row">
+          <Footer />
         </div>
-        <div className="row row-no-gutters">
-          <div className="col-sm-4">
-            <RecentlyVisited />
-            <p>To find information enter keyword below</p>
-            {<Search />}
-          </div>
-          <div className="col-sm-8">
-            
-            {login_form}
-            {signup_form}
-            <hr />
-            {login_signup_button}
-          </div>
-        </div>
-        <Footer />
       </div>
     );
   }

@@ -22,7 +22,7 @@ class InstituteDashboard extends Component {
     associated: []
   }
   */
- 
+
   render() {
     let { componentid } = this.props.match.params;
     console.log('component id' + JSON.stringify(this.props.match))
@@ -94,7 +94,7 @@ class InsDahsboard extends Component {
 
 //helper class to for InsDashborad
 class Tags extends Component {
-
+/*
   state = {
     console_tags: [
       { tag_id: 1, tag_nice_id: "ins_tag_class", title: "Class Management", description: "Manage thing in classroom such as take attendance, report parent" },
@@ -103,7 +103,7 @@ class Tags extends Component {
     ]
   }
 
-  /*
+  
   //for teacher
   state = {
     console_tags:[
@@ -113,7 +113,7 @@ class Tags extends Component {
     ]
   } */
 
-  /*
+  
   //for admin
   state = {
     console_tags:[
@@ -126,7 +126,7 @@ class Tags extends Component {
     ]
   }
   
-  */
+  
 
   generate_link_ref(tagid, nice_tag_id) {
     let { id } = this.props.match.params;
