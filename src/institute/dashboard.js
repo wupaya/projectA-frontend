@@ -99,7 +99,7 @@ class Tags extends Component {
     console_tags: [
       { tag_id: 1, tag_nice_id: "ins_tag_class", title: "Class Management", description: "Manage thing in classroom such as take attendance, report parent" },
       { tag_id: 2, tag_nice_id: "ins_tag_notifications", title: "Notifications", description: "Manage notifications" },
-      { tag_id: 2, tag_nice_id: "ins_notifications", title: "Analysis", description: "Get various analysis" },
+      { tag_id: 2, tag_nice_id: "ins_tag_analysis", title: "Analysis", description: "Get various analysis" },
     ]
   }
 

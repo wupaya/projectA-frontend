@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
-import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
+import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { TaskLoader } from "./ins_common_lib";
 
 
@@ -11,20 +11,12 @@ import { TaskLoader } from "./ins_common_lib";
 class ClassManagementTag extends Component{
   state = {
     tasks:[
-      {taskid:3, task_nice_id:"ins_task_attendence",task_description:"Take attendence"},
-      {taskid:4, task_nice_id:"ins_task_attendance_notification",task_description:"get attendance notifcation"}  
-    ],
-    tag_meta:{
-      public_pages:[
-        {title:"Begum Rokeya University, Rangpur", link:"/begum_rokey_univ"}
-      ]
-    }
+      {taskid:3, task_nice_id:"ins_task_attendence",task_description:"Take attendence"},  
+    ]
   }
     render(){
-        let {id} = this.props.match.params;
-        let {tgid} = this.props.match.params;
+        let {id, tgid} = this.props.match.params;
         let {tasks} = this.state;
-        let {tag_meta} = this.state;
         console.log('laoded component')
         return(
             <div>
