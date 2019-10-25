@@ -36,7 +36,7 @@ class InstituteDashboard extends Component {
 
     return (
       <div>
-        <BreadcrumbsItem to='/s/eduman' icon='account-box' > EDUMAN </BreadcrumbsItem>
+        <BreadcrumbsItem to='/s/eduman' icon='account-box' > Education Management</BreadcrumbsItem>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route exact path='/s/eduman' render={(props) => <Welcome {...props} associated={this.state.associated} />} />

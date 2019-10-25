@@ -30,9 +30,10 @@ export class Dashboard extends Component {
     //Load public page
     let { pageid } = this.props.match.params;
     if (pageid != null && pageid.length > 2) {
-      const Institute_page = React.lazy(() => import('./public_page_loader'));
+      const Institute_page = React.lazy(() => import('./lib/public_page_loader'));
       return (<Institute_page pageid={pageid} />);
     }
+
     return(
         <div className="row">
           <div class="col-lg-12">
@@ -61,8 +62,7 @@ export class Dashboard extends Component {
 class DashboardHome extends Component {
   state = {
     subscribed_services: [
-      { id: 1, title: "Manage My Institute", short_updates: "You have 4 important tasks to manage." },
-      { id: 1, title: "Manage Child's Education", short_updates: "You have 4 important tasks to manage." }
+      { id: 1, title: "Manage Education", short_updates: "Provides services for education management" }
 
     ]
   }
@@ -75,7 +75,6 @@ class DashboardHome extends Component {
     if (subscribed_services.length > 0) {
       init = <div className="row">
         <ServiceShortcut data={subscribed_services[0]} />
-        <ServiceShortcut data={subscribed_services[1]} />
       </div>
     }
     return (
@@ -89,71 +88,7 @@ class DashboardHome extends Component {
   }
 }
 
-class ManagementTaskShortcut extends Component {
-  render() {
-    let { name } = this.props;
-    return (
-      <div class="card" style={{ width: '18rem' }}>
-        <div class="card-body">
-          <h5 class="card-title">{name}</h5>
-        </div>
-      </div>
-    );
-  }
-}
-/*
-
-class Search extends Component{
-
-    baz(e){
-         e.preventDefault();
-	  }
-    constructor(props){
-
-        super(props);
-        //his.onlogin_demo = this.onlogin_demo.bind(this);
-        this.state = {
-            value:"some arbitary value",
-        };
-        this.state = {
-            data: {},
-            login_in_progress:false
-        };
-
-    }
-
-    render(){
-        const { data } = this.state
-        const { login_in_progress } = this.state
-
-        var login_form =             <form>
-              <div className="form-row align-items-center">
-                <div className="col-auto">
-
-                  <input type="text" className="form-control mb-2" id="key" placeholder="Enter your institute name"  />
-                </div>
-
-
-                <div className="col-auto">
-                  <button onClick={(e) => this.baz(e)} type="submit" className="btn btn-primary mb-2">Find</button>
-
-                </div>
-              </div>
-            </form>
-        var loader_text = login_in_progress ? "Loading..." : ""
-        return (
-            <div>
-            {login_form}
-            {loader_text}
-            </div>
-        );
-    }
-}
-
-*/
-
 class ServiceShortcut extends Component {
-
   render() {
     let { data } = this.props;
     var default_title = <h6 class="card-subtitle mb-2 text-muted">Educational Institute Manager</h6>;
@@ -162,9 +97,8 @@ class ServiceShortcut extends Component {
       <div class="card" style={{ width: '18rem' }}>
         <div class="card-body">
           <h5 class="card-title">{data["title"]}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Educational Institute Manager</h6>
           <p class="card-text">{data["short_updates"]}</p>
-          <Link to="/s/eduman" class="card-link">Get started</Link>
+          <Link to="/s/eduman" class="card-link">Open</Link>
         </div>
       </div>
     );

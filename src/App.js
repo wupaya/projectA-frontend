@@ -107,11 +107,6 @@ class Home extends Component {
     var login_signup_button = this.state.isLoggedIn ? "" : <a href="#" onClick={(e) => this.signup_toggle(e)} >{sign_login_button_text}</a>;
 
     let { pageid } = this.props.match.params;
-    
-    if (pageid != null && pageid.length > 2) {
-      const Institute_page = React.lazy(() => import('./institute/' + pageid));
-      return (<Institute_page />);
-    }
 
     if (pageid == null && !this.state.isLoggedIn) {
       return (

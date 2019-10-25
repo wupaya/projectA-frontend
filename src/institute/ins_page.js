@@ -39,14 +39,10 @@ class Page1 extends Component{
         //{this.props.match.params.id}
         
         return(
-        <div className="container">
-            <NavBar onLogOut={this.onLogOutHangle.bind(this)} />
+          <div>
             <PageHeader pagedata={page}/>
             <ViewSelectorRouter pagedata={page}/>
-            <div className="row">
-                <Footer />
             </div>
-        </div>
         );
     }
 }
