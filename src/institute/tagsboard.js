@@ -82,7 +82,6 @@ class Tags extends Component {
                     <div class="col-md-auto">
                         <p>You are associated with {id} as { associations.map((key, index)=>{return <b>{key+", "}</b>})}</p>
                     </div>
-                    
                 </div>
                 <hr />
                 <div className="row">

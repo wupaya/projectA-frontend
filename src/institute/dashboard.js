@@ -31,11 +31,13 @@ class InstituteDashboard extends Component {
         },
       ]
     }
+    this.onDesignationSelectionHandler = this.onDesignationSelectionHandler.bind(this);
   }
 
-  onDesignationSelectionHandler(designation){
+  onDesignationSelectionHandler(e, designation){
+    //e.preventDefault();
     console.log(designation + ' in callback');
-    this.setState({selected_designation:"Somethign"}, function (){
+    this.setState({selected_designation:"Somethign"}, ()=>{
       console.log('inside setUpdate')
     });
     console.log('after setUpdate without callback')
@@ -57,9 +59,8 @@ class InstituteDashboard extends Component {
         <BreadcrumbsItem to='/s/eduman' icon='account-box' > Education Management</BreadcrumbsItem>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            
-            <Route exact path='/s/eduman' render={(props) => <Welcome {...props} associated={this.state.associated} onDesignationSelection={this.onDesignationSelectionHandler.bind(this)}/>} />
-            <Route path="/s/eduman/:id" render={(props) => <InsDahsboard {...props}/>} />
+            <Route exact path='/s/eduman' render={(props) => <Welcome {...props} associated={this.state.associated} onDesignationSelection={this.onDesignationSelectionHandler}/>} />
+            <Route path="/s/eduman/:id" render={(props) => <InsDahsboard {...props} designation={selected_designation}/>} />
           </Switch>
         </Suspense>
       </div>

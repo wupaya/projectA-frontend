@@ -60,7 +60,7 @@ class Welcome extends Component {
               {entry["allowed_services"].length > 0 ? "Show services for " : "Service available after accepting requests. Average accepting time: 20 hours. You are wating for 10 hours" }
               {
                 entry["allowed_services"].map((key, index)=>{
-                return <Link to={{ pathname: "/s/eduman/" + entry["short_name"] , search: "?designation=Teacher"}} onClick={()=>{this.props.onDesignationSelection(key["designation"])}}>
+                return <Link to={{ pathname: "/s/eduman/" + entry["short_name"] , search: "?designation=Teacher"}} onClick={(e)=>{this.props.onDesignationSelection(e, key["designation"])}}>
                 <small>{key["designation"]} </small>
               </Link> 
                 })
