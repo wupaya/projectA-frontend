@@ -29,6 +29,10 @@ class Welcome extends Component {
     var button_text = this.state.show_page_create_form ? "" : <button onClick={this.toggle_page_create.bind(this)}>Create Page</button>;
     var page_create_form = this.state.show_page_create_form ? <CreateInstitutePageForm onCancel={this.onCancelHandle.bind(this)} onCreatePage={this.onCreatePageHandle.bind(this)} /> : "";
     let { associated } = this.props;
+
+    if (associated == null){
+      return "Loading..."
+    }
     console.log(associated);
     var welcome = <div>
       <p>You are not associated with any institute yet.</p>
@@ -44,7 +48,8 @@ class Welcome extends Component {
       {button_text}
       {page_create_form}
     </div>;
-    var welcome_back = <div>
+    
+      var welcome_back = <div>
       <p>Your are associated with</p>
       <hr />
       {/*{ pathname: "/private/service/eduman/"+id, search: "?action=show_all_designation" }*/}
@@ -72,6 +77,7 @@ class Welcome extends Component {
       <hr />
       <p><Link to="/s/eduman/tg/ins_tag_join_institute">Join with a new institute</Link></p>
     </div>;
+    
 
     var view = associated.length > 0 ? welcome_back : welcome;
 

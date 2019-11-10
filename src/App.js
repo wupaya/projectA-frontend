@@ -6,6 +6,7 @@ import { Dashboard } from './dashboard';
 import { ThroughProvider } from 'react-through';
 import { withRouter } from 'react-router-dom';
 import { NavBar, Footer, RecentlyVisited } from './lib/commons';
+import { Configuration } from './lib/config';
 
 
 const DEBUG = true;
@@ -96,6 +97,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(Configuration.base_url);
     const Search = React.lazy(() => import('./lib/' + 'search'));
     const SignUp = React.lazy(() => import('./lib/' + 'signup'));
     
@@ -153,9 +155,8 @@ class Login extends Component {
   baz(e) {
     e.preventDefault();
     this.setState({ login_in_progress: true });
-    console.log($("#email").val());
-    const url = 'http://13.232.5.188/api/login/';
-    //const url = 'http://localhost:8000/login/';
+    
+    const url = Configuration.base_url+'/login/';
 
     $.ajax({
       url: url,

@@ -5,32 +5,18 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-ro
 import { withRouter } from 'react-router-dom';
 import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { TaskLoader } from './ins_common_lib';
-
+import { Configuration } from '../lib/config';
 
 /*This is the service reception. It shows associated institute lists and allow creating new page.*/
 class InstituteDashboard extends Component {
   constructor(props){
-    super(props)
-    this.state = {
+    super(props);
+    this.state= {
       selected_designation: "",
-      associated: [
-        {
-          id: 1, short_name: "BRUR", long_name: "Begum Rokeya University, Rangpur",
-          status: "joined",
-          join_date: "July 1st 2019",
-          allowed_services: [
-            { id: 1, designation: "Parent" },
-            { id: 2, designation: "Teacher" }
-          ]
-        },
-        {
-          id: 2, short_name: "RGC", long_name: "Rangpur Govt. College, Rangpur",
-          status: "sent_join_request",
-          join_date: "July 1st 2019",
-          allowed_services: []
-        },
-      ]
+      associated:null
     }
+
+    
     this.onDesignationSelectionHandler = this.onDesignationSelectionHandler.bind(this);
   }
 
@@ -47,6 +33,33 @@ class InstituteDashboard extends Component {
     console.log("Component unmount "+ this.state.selected_designation)
     this.setState({selected_designation:"Somethign"}, function (){
       console.log('inside setUpdate')
+    });
+  }
+
+  componentDidMount(){
+    const url = Configuration.base_url+'/service_request/';
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      //cache: false,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        "service_name": "education",
+        "task": {
+          "task_id": "dashboard",
+          "data": {}
+        }
+    }),
+      success: function (data) {
+        console.log("got daata" + data["associated"]);
+        console.log(JSON.stringify(data))
+        this.setState({associated:data["associated"]})
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
     });
   }
 
@@ -110,11 +123,6 @@ class InsDahsboard extends Component {
     );
   }
 }
-
-
-
-
-
 
 class TagLoader extends Component {
 

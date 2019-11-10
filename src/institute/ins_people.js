@@ -4,27 +4,51 @@ import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from "react-router-dom";
 import {withRouter} from 'react-router-dom';
 import { Breadcrumbs, BreadcrumbsItem } from "react-breadcrumbs-dynamic";
-
+import { Configuration } from '../lib/config';
 
 
 class ManageStuff extends Component{
-  state = {
-    tasks:[
-      {taskid:3, task_nice_id:"ins_stuff_list",task_description:"Show all stuff"},
-      {taskid:4, task_nice_id:"ins_add_stuff",task_description:"add new stuff"},
-      {taskid:13, task_nice_id:"ins_remove_stuff",task_description:"remove stuff"},
-      {taskid:15, task_nice_id:"ins_stuff_details",task_description:"Show stuff details"},
-      {taskid:16, task_nice_id:"ins_edit_stuff",task_description:"I want to change the responsibility & permission of stuff"}
 
-    ]
+  constructor(props){
+    super(props)
+    this.state ={
+      tasks: null
+    }
+  }
+
+  componentDidMount(){
+    const url = Configuration.base_url+'/service_request/';
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      //cache: false,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        "service_name": "education",
+        "task": {
+          "task_id": "manage_people_tag",
+          "data": {}
+        }
+    }),
+      success: function (data) {
+        console.log(JSON.stringify(data))
+        this.setState({tasks:data["tasks"]})
+      }.bind(this),
+      error: function (xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   }
     render(){
         let {id} = this.props;
         let {tasks} = this.state;
-
+        if(tasks == null)
+        return "Loading..."
         return(
             <div>
-                <BreadcrumbsItem to="/private/service/eduman/:id?action=details_console_tag&tag_id=1&component=ins_people">Manage People</BreadcrumbsItem>
+                <BreadcrumbsItem to="/s/eduman/:id?action=details_console_tag&tag_id=1&component=ins_people">Manage People</BreadcrumbsItem>
                 <p>Stuff Overview</p>
                 <hr />
                 <p>You have <a href="#" className="btn btn-outline-primary">20 active stuff,</a>
