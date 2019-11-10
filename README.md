@@ -17,3 +17,6 @@ npm start
 
 Server should be running now. A tab should be open in your default browser.
 Your environment is ready now.
+
+build the for deployment with following command 
+npm run build
